@@ -1,0 +1,153 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\setlength{\parindent}{0pt}
+
+\title{PMTH332 Assignment 1}
+\date{21 July 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+Let $\sim$ define an equivalence relation on the set $X$, and consider the quotient set $X/\sim = \{[x] | x \in X\}$.
+
+\hfill \break
+For each $[x] \in X/\sim$, the reflexive property of $\sim$ means that $x \in [x]$, so all $[x]$ are nonempty.
+
+\hfill \break
+Suppose $x, y \in X$ and $y \notin [x]$. That is, $x \sim y$ does not hold. Now suppose that $[x] \cap [y] \neq \varnothing$. Then
+$\exists t \in [x] \cap [y]$ such that $x \sim t$ and $y \sim t$. By the symmetry of $\sim$, $t \sim y$. Then, by the transitivity of $\sim$,
+there holds $x \sim y$. However this is a contradiction. Therefore, if $y \notin [x]$, then $[x]$ and $[y]$ are disjoint subsets of $X$.
+
+\hfill \break
+As every $x \in X$ has an equivalence class $[x]$, it holds that $\underset{x \in X}{\cup} [x] = X$.
+
+\hfill \break
+$\implies X/\sim$ defines a partition of $X$.
+
+\hfill \break
+Now let $\{X_\lambda | \lambda \in \Lambda\}$ be a partition of $X$. Define the relation $\sim$ such that $x \sim y$ if and only if $x, y \in X_\lambda$
+for some $\lambda \in \Lambda$.
+
+\hfill \break
+By definition $x \sim x$ holds, as does $y \sim x$ if $x \sim y$ holds. Suppose $x \sim y$ and $y \sim z$ hold. Then $x, y \in X_\lambda$ and $y, z \in X_\mu$ for
+$\lambda, \mu \in \Lambda$. However, as $\{X_\lambda\}$ is a partition of $X$, each element of $X$ can belong to only one $X_\lambda$. Therefore,
+$y \in X_\lambda$ and $y \in X_\mu$ implies that $\lambda = \mu$. Further, this implies that $x, z \in X_\lambda = X_\mu$, and so $x \sim z$.
+
+\hfill \break
+$\implies \sim$ is an equivalence relation on $X$.
+
+\section*{Question 2}
+
+Let $\bar{a}$ denote the right inverse of $a \in G$, and $e$ the right neutral element of $G$. Then
+
+\begin{align}
+    \text{(G2R)} \implies \bar{a} &= \bar{a} \ast e \nonumber\\
+    &= \bar{a} \ast (a \ast \bar{a}) \nonumber\\
+    \text{(G1)} \implies &= (\bar{a} \ast a) \ast \bar{a} \label{eq:2-1}
+\end{align}
+
+\begin{align*}
+    \text{(G3R)} \implies e &= \bar{a} \ast \bar{\bar{a}}\\
+    \text{(\ref{eq:2-1})} \implies &= ((\bar{a} \ast a) \ast \bar{a}) \ast \bar{\bar{a}}\\
+    \text{(G1)} \implies &= (\bar{a} \ast a) \ast (\bar{a} \ast \bar{\bar{a}})\\
+    \text{(G3R)} \implies &= (\bar{a} \ast a) \ast e\\
+    \text{(G1)} \implies &= \bar{a} \ast a \implies \text{(G3)}
+\end{align*}
+
+That is, $\forall a \in G, \exists! \bar{a} \in G$ such that $a \ast \bar{a} = \bar{a} \ast a = e$. Now,
+
+\begin{align*}
+    \text{(G2R)} \implies a &= a \ast e\\
+    \text{(G3)} \implies &= a \ast (\bar{a} \ast a)\\
+    \text{(G1)} \implies &= (a \ast \bar{a}) \ast a\\
+    \text{(G3)} \implies &= e \ast a \implies \text{(G2)}
+\end{align*}
+
+That is, $\exists e \in G$ such that $\forall a \in G, a \ast e = e \ast a = a$. Therefore (G1), (G2) and (G3) hold, so (G, $\ast$) is a group.
+
+\section*{Question 3}
+
+Firstly, to show that the operation is well defined, let $l, l' \in [l]$ and $k, k' \in [k]$. Consider
+
+\begin{equation*}
+    [l'] + [k'] = [l' + k']
+\end{equation*}
+
+Note that $l - l' = cm$ and $k - k' = dm$ for $a, d \in \mathbb{Z}$. Therefore, we have that
+
+\begin{equation*}
+    [l' + k'] = [l - cm + k - dm] = [l + k + em]
+\end{equation*}
+
+where $e = -c - d \in \mathbb{Z}$. We also have that $l + k - (l + k + em) = em$, which means that $l + k \cong l + k + em \cong l' + k' \text{mod} m$. That is,
+$[l + k] = [l' + k']$. Therefore, the binary operation is well defined as it does not depend on the representatives chosen for each equivalence class.
+
+\hfill \break
+Firstly, we have that for $[a], [b], [c] \in \mathbb{Z}_m$, $[a] + ([b] + [c]) = [a] + [b + c] = [a + b + c] = ([a + b]) + c = ([a] + [b]) + [c]$, so (G1) holds.
+
+\hfill \break
+Secondly, note that $[0] \in \mathbb{Z}_m$ and for $[a] \in \mathbb{Z}_m$, $[a] + [0] = [a + 0] = [a] = [0 + a] = [0] + [a]$, so (G2) holds.
+
+\hfill \break
+Finally, for each $[a] \in \mathbb{Z}_m$, there exists $[-a] \in \mathbb{Z}_m$, where $[a] + [-a] = [a - a] = [0] = [-a + a] = [-a] + [a]$, so (G3) holds.
+
+\hfill \break
+Therefore, $(\mathbb{Z}_m, +)$ is a group.
+
+\section*{Question 4}
+If $(a \ast b)^2 = a^2 \ast b$, then it follows that
+
+\begin{align*}
+    a \ast b \ast a \ast b &= a \ast a \ast b \ast b\\
+    \bar{a} \ast a \ast b \ast a \ast b &= \bar{a} \ast a \ast a \ast b \ast b\\
+    e \ast b \ast a \ast b &= e \ast a \ast b \ast b\\
+    b \ast a \ast b \ast \bar{b} &= a \ast b \ast b \ast \bar{b}\\
+    b \ast a \ast e &= a \ast b \ast e\\
+    \implies b \ast a &= a \ast b
+\end{align*}
+
+Therefore, $(G, \ast)$ is abelian.
+
+\end{document}

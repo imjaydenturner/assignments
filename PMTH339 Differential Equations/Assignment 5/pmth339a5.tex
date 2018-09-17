@@ -1,0 +1,197 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\newcommand\pd[2]{\frac{\delta{#1}}{\delta{#2}}}
+\newcommand\pdsq[2]{\frac{\delta^2{#1}}{\delta{#2}^2}}
+
+\setlength{\parindent}{0pt}
+
+\iffalse <Subject> Assignment <Assignment number> \fi
+\title{PMTH399 Assignment 5}
+\iffalse <dd> <Month> <yyyy> \fi
+\date{17 August 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+\begin{equation} \label{eq:1-1}
+    \alpha^2\left(\pdsq{u}{x} + \pdsq{u}{y}\right) = \pd{u}{t}
+\end{equation}
+
+Consider solutions of the form $u(x, y, t) = F(x)G(y)H(T)$. Substituting into (\ref{eq:1-1}) gives
+
+\begin{equation*}
+    \alpha^2(F''GH + FG''H) = FGH'
+\end{equation*}
+
+Divide by $u = FGH$,
+
+\begin{equation} \label{eq:1-6}
+    \alpha^2\left(\frac{F''}{F} + \frac{G''}{G}\right) = \frac{H'}{H}
+\end{equation}
+
+As the left hand side of (\ref{eq:1-6}) is a function of $x$ and $y$, and the right hand side is a function of $t$, both
+sides must be equal to a constant $k$ for the equality to hold. Therefore, the following must hold
+
+\begin{align}
+    H' - kH &= 0 \label{eq:1-2}\\
+    \frac{F''}{F} - \frac{k}{\alpha^2} &= -\frac{G''}{G} \label{eq:1-3}
+\end{align}
+
+Similiarly, the left hand side of (\ref{eq:1-3}) is dependent on $x$, while the right hand side is
+dependent on $y$. Hence, both must be equal to a consant $\lambda$, so
+
+\begin{align}
+    G'' + \lambda G &= 0 \label{eq:1-4}\\
+    F'' - \left(\lambda + \frac{k}{\alpha^2}\right) &= 0 \label{eq:1-5}
+\end{align}
+
+Thus (\ref{eq:1-2}), (\ref{eq:1-4}) and (\ref{eq:1-5}) are ordinary differential equations that must be
+satisified by $F$, $G$ and $H$ if $u(x, y, t) = F(x)G(y)H(t)$ is a solution to (\ref{eq:1-1}).
+
+\section*{Question 2}
+
+\begin{equation} \label{eq:2-1}
+    \pdsq{u}{x} + \pdsq{u}{y} + \lambda u = 0
+\end{equation}
+
+Consider solutions of the form $u(x, y) = F(x)G(y)$ such that $u(x, y) = 0$ on the boundaries of
+the unit square, and $u(x, y)$ is not uniformly zero inside the unit square. That is,
+$u(0, y) = u(1, y) = u(x, 0) = u(x, 1) = 0$ for $0 \leq x \leq 1$ and $0 \leq y \leq 1$.
+Substituting the desired form of $u$ into (\ref{eq:2-1}) gives
+
+\begin{equation*}
+    F''G + FG' + \lambda FG = 0
+\end{equation*}
+
+Divide by $u = FG$,
+
+\begin{align}
+    \frac{F''}{F} + \frac{G''}{G} + \lambda &= 0\nonumber\\
+    \implies \frac{F''}{F} + \lambda &= -\frac{G''}{G} \label{eq:2-2}
+\end{align}
+
+As the left hand side of (\ref{eq:2-2}) is a function of $x$, and the right hand side is a function
+of $y$, both must be equal to a constant $k$. Hence,
+
+\begin{align}
+    G'' + kG &= 0 \label{eq:2-3}\\
+    F'' + (\lambda - k)F &= 0 \label{eq:2-4}
+\end{align}
+
+If $k < 0$, then $G(y) = C_1 e^{\sqrt{k} y} + C_2 e^{-\sqrt{k}y}$. However this does not statisfy
+the boundary conditions, as $G(0) = 0 = C_1 + C_2 \implies C_2 = -C_1$ and 
+$G(1) = 0 = C_1(e^{\sqrt{k}} - e^{-\sqrt{k}})$, which does not hold for $k > 0$.
+
+\hfill \break
+If $k = 0$, then $G(y) = C_1y + C_2$. Respecting the boundary conditions,
+$G(0) = 0 = C_2$ and $G(1) = 0 = C_1$, so $G(y) = 0$. However, we are looking for solutions $u$ that
+are not uniformly zero, so we disregard this case.
+
+\hfill \break
+If $k > 0$, then $G(y) = C_1\cos\sqrt{k}y + C_2\sin\sqrt{k}y$. The boundary conditions require
+$G(0) = 0 = C_1$ and $G(1) = 0 = C_2\sin\sqrt{k}$. For solutions $u \neq 0$, $C_2 \neq 0$, thus it
+must hold that $\sqrt{k} = m\pi \implies k = m^2\pi^2$ for $m \in \mathbb{Z}$.
+
+\hfill \break
+Equation (\ref{eq:2-4}) then becomes
+
+\begin{equation} \label{eq:2-5}
+    F'' + (\lambda - m^2\pi^2)F = 0
+\end{equation}
+
+Using the same reasoning for $G$, it must hold that $\lambda - m^2\pi^2 > 0$. In this case, $F$
+must be of the form $F(x) = A_1\cos(\sqrt{\lambda - m^2\pi^2}x) + A_2\sin(\sqrt{\lambda - m^2\pi^2}x)$.
+The boundary conditions require $F(0) = 0 = A_1$ and $F(1) = 0 = A_2\sin(\sqrt{\lambda - m^2\pi^2})$. Therefore
+$\sqrt{\lambda - m^2\pi^2} = n\pi \implies \lambda = (n^2 + m^2)\pi^2$ for $n \in \mathbb{Z}$. Further,
+as $\lambda - m^2\pi^2 > 0$ we require that $n > 0$.
+
+\hfill \break
+Therefore, when $\lambda$ is of the form $\lambda = (n^2 + m^2)\pi^2$ where $n, m \in \mathbb{Z}$
+such that $n > m > 0$, (\ref{eq:2-1}) has solutions of the form
+
+\begin{equation} \label{eq:2-6}
+    u(x, y) = A\sin(n\pi x)\sin(m\pi y)
+\end{equation}
+
+where $A$ is a constant.
+
+\section*{Question 3}
+
+\begin{equation} \label{eq:3-1}
+    \pdsq{u}{x} + \lambda u = 0
+\end{equation}
+
+If $\lambda < 0$ then $u(x) = C_1e^{\sqrt{\lambda}x} + C_2e^{-\sqrt{\lambda}x}$. Respecting the
+boundary conditions, $u(0) = 0 = C_1 + C_2 \implies C_2 = -C_1$ and
+$u(1) - u'(1) = 0 = C_1(e^{\sqrt{\lambda}}(1 - \sqrt{\lambda}) - e^{-\sqrt{\lambda}}(1 + \sqrt{\lambda}))$.
+However this implies $C_1 = 0$ and as we are only interested in non-trivial solutions to (\ref{eq:3-1}), so we
+ignore this case.
+
+\hfill \break
+If $\lambda = 0$ then $u(x) = C_1x + C_2$. The boundary conditions are $u(0) = 0 = C_2$ and
+$u(1) - u'(1) = 0 = C_1 - C_1$. Thus for $\lambda = 0$, $u(x) = c$ for constant $c$ is a solution.
+
+\hfill \break
+If $\lambda > 0$, then $u(x) = C_1\cos\sqrt{\lambda}x + C_2\sin\sqrt{\lambda}x$. The boundary conditions
+require $u(0) = 0 = C_1$ and
+$u(1) - u'(1) = 0 = C_2\sin\sqrt{\lambda} - C_2\sqrt{\lambda}\cos\sqrt{\lambda} \implies
+\sqrt{\lambda} = \tan\sqrt{\lambda}$.
+
+\hfill \break
+Note that for $\lambda \geq 0$, $\sqrt{\lambda} = \tan\sqrt{\lambda}$ has infinite solutions. Therefore
+there exists a sequence $\{\lambda_n\}_{n = 0}^\infty$ such that for $\lambda = \lambda_n$, (\ref{eq:3-1})
+has a non-trivial solution. Note that $\lambda = 0$ solves $\sqrt{\lambda} = \tan\sqrt{\lambda}$, so this
+case is included in the sequence. The non-trivial solutions are
+
+\begin{equation*}
+    u(x) = \begin{cases}
+        A &, \lambda_n = 0\\
+        B\sin\sqrt{\lambda}x &, \text{otherwise}
+    \end{cases}
+\end{equation*}
+
+for constants $A$ and $B$.
+
+\end{document}

@@ -1,0 +1,379 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\setlength{\parindent}{0pt}
+
+\title{PMTH339 Assignment 4}
+\date{10 August 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+\begin{equation} \label{eq:1-1}
+    u'' + x^2u = 0
+\end{equation}
+
+Consider power series solutions to (\ref{eq:1-1}), that is $u(x) = \sum\limits_{n = 0}^\infty a_nx^n$. Then
+$u' = \sum\limits_{n = 0}^\infty na_nx^{n - 1}$ and $u'' = \sum\limits_{n = 0}^\infty n(n - 1)a_nx^{n - 2}$. Substituting
+into (\ref{eq:1-1}),
+
+\begin{align}
+    0 &= u'' + x^2u\nonumber\\
+    &= \sum_{n = 0}^\infty n(n - 1)a_nx^{n - 2} + \sum_{n = 0}^\infty a_nx^{n + 2}\nonumber\\
+    &= \sum_{n = -2}^\infty (n + 1)(n + 2)a_{n + 2}x^{n} + \sum_{n = 2}^\infty a_{n - 2}x^{n}\nonumber\\
+    &= 2a_2 + 6a_3x + \sum_{n = 2}^\infty x^n((n + 1)(n + 2)a_{n + 2} + a_{n - 2}) \label{eq:1-2}
+\end{align}
+
+For (\ref{eq:1-2}) to hold, we require $a_2 = a_3 = 0$ and $(n + 1)(n + 2)a_{n + 2} + a_{n - 2} = 0, \forall n \in \mathbb{N} \cup \{0\}$.
+Using the initial conditions $u(0) = 1, u'(0) = 0$ gives $a_0 = 1, a_1 = 0$. These conditions give a recursive definition for the
+coefficients of the power series:
+
+\begin{equation} \label{eq:1-3}
+    \{a_n\}_{n = 0}^\infty = \begin{cases}
+        a_0 = 1\\
+        a_1 = 0\\
+        a_2 = 0\\
+        a_3 = 0\\
+        a_n = -\frac{a_{n - 4}}{n(n - 1)}
+    \end{cases}
+\end{equation}
+
+Note that $a_k = 0$ whenever $k$ is not a multiple of 4, and that the terms are negative for odd multiples of 4
+and positive for even multiples of 4. Therefore we can construct another sequence of coefficients $\{b_n\}_{n = 0}^\infty$ as
+
+\begin{equation} \label{eq:1-4}
+    b_n = (-1)^n \frac{1}{\prod\limits_{k = 1}^n (4k)(4k - 1)}
+\end{equation}
+
+such that $u(x) = \sum_{n = 0}^\infty b_n x^{4n}$. Therefore, a power series solution to (\ref{eq:1-1}) is
+
+\begin{equation} \label{eq:1-5}
+    u(x) = \sum_{n = 0}^\infty (-1)^n \frac{1}{\prod\limits_{k = 1}^n (4k)(4k - 1)} x^{4n}
+\end{equation}
+
+To determine for what values of $x$ (\ref{eq:1-5}) converges, use the ratio test:
+
+\begin{align*}
+    L &= \left|\frac{(-1)^{n + 1} \frac{1}{\prod\limits_{k = 1}^{n + 1} (4k)(4k - 1)} x^{4(n + 1)}}{(-1)^n \frac{1}{\prod\limits_{k = 1}^n (4k)(4k - 1)} x^{4n}}\right|\\
+    &= \left|\frac{\prod\limits_{k = 1}^n (4k)(4k - 1)x^{4n + 4}}{\prod\limits_{k = 1}^{n + 1} (4k)(4k - 1) x^{4n}}\right|\\
+    &= x^4\left|\frac{1}{4(n + 1)(4(n + 1) - 1)}\right|\\
+    &= x^4\left|\frac{1}{(4n + 4)(4n + 3)}\right|
+\end{align*}
+
+$\lim\limits_{n \to \infty} L = 0 < 1$, therefore the series (\ref{eq:1-5}) converges absolutely $\forall x \in \mathbb{R}$.
+
+\newpage
+\section*{Question 3}
+
+The Chebyshev polynomials can be found with the following recursive definitions
+
+\begin{align*}
+    \{T_n(x)\}_{n = 0}^\infty = \begin{cases}
+        T_0(x) = 1\\
+        T_{n + 1}(x) = xT_n(x) - (1 - x^2)U_n(x)
+    \end{cases}
+    && \{U_n(x)\}_{n = 0}^\infty = \begin{cases}
+        U_0(x) = 0\\
+        U_{n + 1}(x) = T_n(x) + xU_n(x)
+    \end{cases}
+\end{align*}
+
+The following table summarises the process of finding $T_5(x)$:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        $n$ & $T_n(x)$ & $U_n(x)$\\
+        \hhline{|=|=|=|}
+        0 & 1 & 0\\
+        \hline
+        1 & \parbox{3cm}{
+            \begin{align*}
+                &xT_0(x) - (1 - x^2)U_0(x)\\
+                &= x
+            \end{align*}}
+            & \parbox{3cm}{
+                \begin{align*}
+                    &T_0(x) + xU_0(x)\\
+                    &= 1
+                \end{align*}}\\
+        \hline
+        2 & \parbox{3cm}{
+                \begin{align*}
+                    &xT_1(x) - (1 - x^2)U_1(x)\\
+                    &= 2x^2 - 1
+                \end{align*}}
+            & \parbox{3cm}{
+                \begin{align*}
+                    &T_1(x) + xU_1(x)\\
+                    &= 2x
+                \end{align*}}\\
+        \hline
+        3 & \parbox{3cm}{
+                \begin{align*}
+                    &xT_2(x) - (1 - x^2)U_2(x)\\
+                    &= x(2x^2 - 1) - (1 - x^2)(2x)\\
+                    &= 2x^3 - x - 3x + 2x^3\\
+                    &= 4x^3 - 3x
+                \end{align*}}
+            & \parbox{3cm}{
+                \begin{align*}
+                    &T_2(x) + xU_2(x)\\
+                    &= 2x^2 - 1 + x(2x)\\
+                    &= 4x^2 - 1
+                \end{align*}}\\
+        \hline
+        4 & \parbox{3cm}{
+                \begin{align*}
+                    &xT_3(x) - (1 - x^2)U_3(x)\\
+                    &= x(4x^3 - 3x) - (1 - x^2)(4x^2 - 1)\\
+                    &= 4x^4 - 3x^2 - 4x^2 + 1 + 4x^4 - x^2\\
+                    &= 8x^4 - 8x^2 + 1
+                \end{align*}}
+            & \parbox{3cm}{
+                \begin{align*}
+                    &T_3(x) + xU_3(x)\\
+                    &= 4x^3 - 3x + x(4x^2 - 1)\\
+                    &= 4x^3 - 3x + 4x^3 - x\\
+                    &= 8x^3 - 4x
+                \end{align*}}\\
+        \hline
+        5 & \parbox{3cm}{
+                \begin{align*}
+                    &xT_4(x) - (1 - x^2)U_4(x)\\
+                    &= x(8x^4 - 8x^2 + 1) - (1 - x^2)(8x^3 - 4x)\\
+                    &= 8x^5 - 8x^3 + x - 8x^3 + 4x + 8x^5 - 4x^3\\
+                    &= 16x^5 - 20x^3 + 5x
+                \end{align*}}
+            & \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Therefore the 5th Chebyshev polynomial is
+
+\begin{equation} \label{eq:3-1}
+    T_5(x) = 16x^5 - 20x^3 + 5x
+\end{equation}
+
+\newpage
+\section*{Question 4}
+
+\begin{equation} \label{eq:4-1}
+    (1 - x^2)y'' - 2xy' + \alpha(\alpha + 1)y = 0
+\end{equation}
+
+a) To find a power series solution to (\ref{eq:4-1}), assume $y$ is of the form $y = \sum\limits_{n = 0}^\infty a_nx^n$. Then (\ref{eq:4-1})
+requires
+
+\begin{align*}
+    0 &= (1 - x^2)\sum\limits_{n = 0}^\infty n(n - 1)a_nx^{n - 2} - 2x\sum\limits_{n = 0}^\infty na_nx^{n - 1} + \alpha(\alpha + 1)\sum\limits_{n = 0}^\infty a_nx^n\\
+    &= \sum\limits_{n = 0}^\infty n(n - 1)a_nx^{n - 2} - \sum\limits_{n = 0}^\infty n(n - 1)a_nx^n
+        - 2\sum\limits_{n = 0}^\infty na_nx^n + \alpha(\alpha + 1)\sum\limits_{n = 0}^\infty a_nx^n\\
+    &= \sum\limits_{n = -2}^\infty(n + 1)(n + 2)a_{n + 2}x^n - \sum\limits_{n = 0}^\infty n(n - 1)a_nx^n
+        - 2\sum\limits_{n = 0}^\infty na_nx^n + \alpha(\alpha + 1)\sum\limits_{n = 0}^\infty a_nx^n\\
+    &= \sum\limits_{n = 0}^\infty x^n((n + 1)(n + 2)a_{n + 2} + a_n(n(n - 1) + 2n - \alpha(\alpha + 1)))
+\end{align*}
+
+For this to hold, all coefficients in the series must be zero, thus the following recursion relation on $a_n$ must hold:
+
+\begin{align}
+    a_{n + 2} &= a_n \frac{n(n - 1) + 2n - \alpha(\alpha + 1)}{(n + 1)(n + 2)}\nonumber\\
+    &= a_n \frac{n^2 - n + 2n - \alpha^2 - \alpha}{(n + 1)(n + 2)}\nonumber\\
+    &= a_n \frac{(n - \alpha)(n + \alpha) + n - \alpha}{n + 1)(n + 2)}\nonumber\\
+    &= a_n \frac{(n - \alpha)(n + \alpha + 1)}{(n + 1)(n + 2)} \label{eq:4-2}
+\end{align}
+
+As (\ref{eq:4-2}) relates $a_{n + 2}$ to $a_n$, two sub sequences of coefficients arise; one for even $n$ and one for odd $n$:
+
+\begin{align*}
+    a_{2n + 2} = a_{2n} \frac{(2n - \alpha)(2n + \alpha + 1)}{(2n + 1)(2n + 2)}
+        && a_{2n + 3} = a_{2n + 1} \frac{(2n + 1 - \alpha)(2n + \alpha + 2)}{(2n + 1)(2n + 3)}
+\end{align*}
+
+Now consider different values of positive integer $\alpha$. If $\alpha$ is even (i.e. $\alpha = 2k$ for some $k \in \mathbb{Z}$), then the even
+sequence terminates when $n = k = \frac{\alpha}{2}$, while the odd sequence is infinite. Likewise, for odd $\alpha$ (i.e. $\alpha = 2k + 1$ for some $k \in \mathbb{Z}$),
+then the odd sequence terminates when $n = k = \frac{\alpha - 1}{2}$, while the even sequence is infinite.
+
+\hfill \break
+Consider $\alpha = 0$. Then the even sequence terminates after $n = 0$. The condition $P_0(1) = 1$ then requires
+
+\begin{equation*}
+    1 = a_0 + \sum\limits_{n = 0}^\infty a_{2n + 1}
+\end{equation*}
+
+Setting $a_1 = 0$ gives $a_{2n + 1} = 0, \forall n \in \mathbb{Z}$. Hence $P_0(x) = a_0 = 1$. Now consider $\alpha = 1$. The odd sequence terminates
+after $n = 0$, and the condition $P_1(1) = 1$ gives
+
+\begin{equation*}
+    1 = a_1 + \sum\limits_{n = 0}^\infty a_{2n}
+\end{equation*}
+
+Setting $a_0 = 0$ gives $a_{2n} = 0, \forall n \in \mathbb{Z}$. Hence $a_1 = 1 \implies P_1(x) = x$. For $\alpha = 2$, the even sequence terminates
+after $n = 1$, and the condition $P_2(1) = 1$ gives
+
+\begin{align*}
+    1 &= a_0 + a_2 + \sum_{n = 0}^\infty a_{2n + 1}\\
+    &= a_0 + a_0\left(\frac{-2\cdot3}{1\cdot2}\right) + \sum_{n = 0}^\infty a_{2n + 1}\\
+    &= a_0(1 - 3) + \sum_{n = 0}^\infty a_{2n + 1}\\
+    &= -2a_0 + \sum_{n = 0}^\infty a_{2n + 1}
+\end{align*}
+
+Setting $a_1 = 1$ makes the terms of the infinite sum vanish, so $a_0 = -\frac{1}{2} \implies a_1 = \frac{3}{2}$. Therefore $P_2(x) = \frac{1}{2}(3x^2 - 1)$.
+For $\alpha = 3$, the odd sequence terminates after $n = 1$ and the condition $P_3(1) = 1$ gives
+
+\begin{align*}
+    1 &= a_1 + a_3 + \sum\limits_{n = 0}^\infty a_{2n}\\
+    &= a_1 + a_1\left(\frac{-2\cdot5}{2\cdot3}\right) + \sum\limits_{n = 0}^\infty a_{2n}\\
+    &= a_1\left(1 - \frac{5}{3}\right) + \sum\limits_{n = 0}^\infty a_{2n}\\
+    &= -\frac{2}{3}a_1 + \sum\limits_{n = 0}^\infty a_{2n}
+\end{align*}
+
+Setting $a_0 = 0$ makes the terms of the infinite sum vanish, leaving $a_1 = -\frac{3}{2} \implies a_3 = \frac{5}{2}$.
+Therefore $P_3(x) = \frac{1}{2}(5x^3 - 3x)$.
+
+\hfill\break
+b) The general solution to (\ref{eq:4-1}) with $\alpha = 1$ is $y = Ay_1 + By_2$, where $y_1 = P_1 = x$, and $y_2$ is another linearly
+independent solution. Dividing (\ref{eq:4-1}) by $1 - x^2$ gives
+
+\begin{equation} \label{eq:4-3}
+    y'' - \frac{2x}{1 - x^2}y' + \frac{2}{1 - x^2}y = 0
+\end{equation}
+
+Therefore, the Wronskian of $y_1$ and $y_2$ can be calculated as
+
+\begin{align*}
+    W &= e^{-\int \frac{-2}{1 - x^2} dx}\\
+    &= e^{2\int \frac{x}{1 - x^2} dx}
+\end{align*}
+
+Substituting $u = 1 - x^2$
+
+\begin{align*}
+    W &= e^{-2 \int \frac{x}{u} \frac{du}{-2x} dx}\\
+    &= e^{- \int \frac{1}{u} du}\\
+    &= e^{-\ln|u|}\\
+    &= \frac{1}{|u|}\\
+    &= \frac{1}{|1 - x^2|}\\
+    &= \frac{1}{1 - x^2}
+\end{align*}
+
+for $|x| < 1$. Therefore $y_2$ is
+
+\begin{align*}
+    y_2 &= y_1 \int \frac{W}{y_1^2}dx\\
+    &= x \int \frac{1}{x^2(1 - x^2)} dx
+\end{align*}
+
+Setting $\frac{1}{x^2(1 - x^2)} = \frac{A}{x} + \frac{B}x^2 + \frac{C}{1 - x} + \frac{D}{1 + x}$ gives
+$1 = Ax(1 - x^2) + B(1 - x^2) + Cx^2(1 + x) + Dx^2(1 - x)$. To find values for $A, B, C, D$, substitute various values of $x$:
+
+\begin{align*}
+    x = 0 \implies 1 &= B\\
+    x = 1 \implies 1 &= 2C \implies C = \frac{1}{2}\\
+    x = -1 \implies 1 &= 2D \implies D = \frac{1}{2}\\
+    x = 2 \implies 1 &= -6A - 3 + 6 - 2 \implies A = 0
+\end{align*}
+
+Therefore
+
+\begin{align*}
+    y_2 &= x \int \frac{1}{x^2} + \frac{1}{2(1 - x}) + \frac{1}{2(1 + x)} dx\\
+    &= x \left(-\frac{1}{x} - \frac{1}{2}\ln|1 - x| + \frac{1}{2}\ln|1 + x|\right)\\
+    &= \frac{x}{2}\ln\left(\frac{1 + x}{1 - x}\right) - 1
+\end{align*}
+
+Therefore, the general solution to (\ref{eq:4-1}) with $\alpha = 1$ and $|x| < 1$ is
+
+\begin{equation*}
+    y = Ax + \frac{Bx}{2}\ln\left(\frac{1 + x}{1 - x}\right) - B
+\end{equation*}
+
+where $A, B \in \mathbb{R}$ are constants.
+
+\section*{Question 5}
+
+\begin{equation} \label{eq:5-1}
+    (1 - x)y' - 2y = 0
+\end{equation}
+
+Suppose $y = \sum_{n = 0}^\infty a_n x^n$ is a solution to (\ref{eq:5-1}). Then
+
+\begin{align*}
+    0 &= (1 - x)\sum_{n = 0}^\infty na_nx^{n - 1} - 2\sum_{n = 0}^\infty a_nx^n\\
+    &= \sum_{n = 0}^\infty na_nx^{n - 1} - \sum_{n = 0}^\infty na_nx^n - 2\sum_{n = 0}^\infty a_nx^n\\
+    &= \sum_{n = -1}^\infty (n + 1)a_{n + 1}x^{n} - \sum_{n = 0}^\infty na_nx^n - 2\sum_{n = 0}^\infty a_nx^n\\
+    &= \sum_{n = 0}^\infty x^n((n + 1)a_{n + 1} - na_n - 2a_n)
+\end{align*}
+
+For this to hold we require $a_0 = \frac{1}{2}a_1$ and $(n + 1)a_{n + 1} = (n + 2)a_n$. Further, for this sum to converge, we require
+
+\begin{align*}
+    \lim\limits_{n \to \infty} \left|\frac{a_{n + 1}}{a_n}\right| &= \lim\limits_{n \to \infty} |x^n|\left|\frac{n + 2}{n + 1}\right| < 1\\
+    \implies \lim\limits_{n \to \infty} |x|\left|\frac{1 + \frac{2}{n}}{1 + \frac{1}{n}}\right| &< 1\\
+    |x| &< 1
+\end{align*}
+
+Therefore any power series solution to (\ref{eq:5-1}) is only convergent on the interval $(-1, 1)$. To find a solution, note that (\ref{eq:5-1})
+is a seperable differential equation, so the solution $y$ satisfies
+
+\begin{align*}
+    \int \frac{1}{y} dy &= 2\int \frac{1}{1 - x} dx\\
+    \ln y &= -2\ln|1 - x| + c\\
+    y &= \frac{A}{(1 - x)^2}
+\end{align*}
+
+The initial condition $y(0) = 1$ gives that $A = 1$. Therefore the solution is $y = \frac{1}{(1 - x)^2}$. Observe that for $|x| < 1$
+
+\begin{align*}
+    y(x) &= \frac{1}{(1 - x)^2}\\
+    &= \frac{d}{dx}\frac{1}{1 - x}\\
+    &= \frac{d}{dx}\sum_{n = 0}^\infty x^n\\
+    &= \sum_{n = 0}^\infty nx^{n - 1}
+\end{align*}
+
+which is a power series solution to (\ref{eq:5-1}).
+
+\end{document}

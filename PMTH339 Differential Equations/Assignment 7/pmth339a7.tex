@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0pt}
+
+\iffalse <Subject> Assignment <Assignment number> \fi
+\title{PMTH339 Assignment 7}
+\iffalse <dd> <Month> <yyyy> \fi
+\date{14 September 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+\begin{equation} \label{eq:1-1}
+    y'' + (3 - \sin x)y = 0
+\end{equation}
+
+Let $a(x) = 3 - \sin x$. Then for all $x$, $a(x) \geq 2$. Therefore,
+if $u$ is a solution to (\ref{eq:1-1}), Corollary 14.3 states that $u$ has an
+increasing sequence of zeroes $\{\alpha_i\}$ where $0 < \alpha_1 \leq \frac{\pi}{\sqrt{2}}$
+and $\alpha_{i + 1} - \alpha_i \leq \frac{\pi}{\sqrt{2}}$ for all $i$.
+
+\hfill \break
+Given the two inequalities above, we can iteratively determine an upper bound for the
+first $n$ zeroes. Firstly, $0 < \alpha_1 \leq \frac{\pi}{\sqrt{2}}$. Then, as
+$\alpha_2 - \alpha_1 \leq \frac{\pi}{\sqrt{2}}$ it must hold that
+
+\begin{equation*}
+    \alpha_2 = \alpha_2 - \alpha_1 + \alpha_1 \leq 
+        \frac{\pi}{\sqrt{2}} + \frac{\pi}{\sqrt{2}} = \sqrt{2}\pi
+\end{equation*}
+
+Repeating the process we get that $\alpha_3 \leq \frac{3\pi}{\sqrt{2}}$. Therefore, as
+$\sqrt{2}\pi \leq 2\pi \leq \frac{3\pi}{\sqrt{2}}$, there are either 2 or 3 zeroes in the
+range $0 \leq x \leq 2\pi$.
+
+\section*{Question 2}
+
+\section*{Question 3}
+
+\section*{Question 4}
+
+\end{document}

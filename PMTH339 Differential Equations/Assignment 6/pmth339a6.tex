@@ -1,0 +1,295 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0pt}
+
+\iffalse <Subject> Assignment <Assignment number> \fi
+\title{PMTH339 Assignment 6}
+\iffalse <dd> <Month> <yyyy> \fi
+\date{24 August 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+The Bessel equation of order $\alpha = 0$ is
+
+\begin{equation} \label{eq:1-1}
+    x^2y'' + xy + x^2y = 0
+\end{equation}
+
+Let $y(x) = \frac{1}{\pi} \int_0^\pi \cos(x\sin\phi)d\phi$. Then the first and second derivatives
+are
+
+\begin{align*}
+    y' &= \frac{1}{\pi}\int_0^\pi \frac{d}{dx}(\cos(x\sin\phi)d\phi)
+        = -\frac{1}{\pi}\int_0^\pi\sin\phi\sin(x\sin\phi)d\phi\\
+    y'' &= -\frac{1}{\pi}\int_0^\pi \frac{d}{dx}(\sin\phi\sin(x\sin\phi)) d\phi
+        = -\frac{1}{\pi}\int_0^\pi \sin^2\phi\cos(x\sin\phi)d\phi
+\end{align*}
+
+Substituting into (\ref{eq:1-1}),
+
+\begin{align*}
+    x^2y'' + xy' + x^2y
+    &= \frac{1}{\pi}\int_0^\pi -x^2\sin^2\phi\cos(x\sin\phi)
+        - x\sin\phi\sin(x\sin\phi) + x^2\cos(x\sin\phi) d\phi\\
+    &= \frac{1}{\pi}\int_0^\pi x^2\cos(x\sin\phi)(1 - \sin^2\phi)
+        - x\sin\phi\sin(x\sin\phi) d\phi\\
+    &= \frac{1}{\pi}\int_0^{\pi} x^2\cos(x\sin\phi)(1 - \sin^2\phi)
+    - x\sin\phi\sin(x\sin\phi) d\phi\\
+    &= \frac{1}{\pi}\int_0^\pi x^2\cos^2\phi\cos(x\sin\phi) - x\sin\phi\sin(x\sin\phi) d\phi
+\end{align*}
+
+Let $u = x\cos\phi$. Then $\frac{du}{d\phi} = -x\sin\phi$ and $u(0) = x, u(\pi) = -x$.
+Continuing the above,
+
+\begin{align*}
+    &= \frac{1}{\pi}\int_{x}^{-x} (u^2\cos(\sqrt{x^2 - u^2}) - x\sin\phi\sin(\sqrt{x^2 - u^2})) \frac{du}{-x\sin\phi}\\
+    &= \frac{1}{\pi}\left(\int_{-x}^x \frac{u^2}{\sqrt{x^2 - u^2}}\cos(\sqrt{x^2 - u^2}) du
+        - \int_{-x}^x\sin(\sqrt{x^2 - u^2}) du\right)
+\end{align*}
+
+Integrating the right integral by parts, set
+$v = \sin(\sqrt{x^2 - u^2}) \implies v' = -\frac{u}{\sqrt{x^2 - u^2}}\cos(\sqrt{x^2 - u^2})$ and
+$w' = 1 \implies w = u$. The integral then becomes
+
+\begin{align*}
+    &= \frac{1}{\pi}\left(\int_{-x}^x\frac{u^2}{\sqrt{x^2 - u^2}}\cos(\sqrt{x^2 - u^2}) du
+        - \left(\left.u\sin(\sqrt{x^2 - u^2}\right|_{-x}^x
+        + \int_{-x}^x \frac{u^2}{\sqrt{x^2 - u^2}}\cos(\sqrt{x^2 - u^2}) du\right)\right)\\
+    &= \frac{1}{\pi}\left(\int_{-x}^x \frac{u^2}{\sqrt{x^2 - u^2}}\cos(\sqrt{x^2 - u^2})
+        - \frac{u^2}{\sqrt{x^2 - u^2}}\cos(\sqrt{x^2 - u^2}) du\right)\\
+    &= 0
+\end{align*}
+
+Hence $y$ is a solution to (\ref{eq:1-1}). Further,
+$y(0) = \frac{1}{\pi}\int_0^\pi \cos(0)d\phi = \frac{1}{\pi}\int_0^\pi d\phi= 1$. Therefore,
+by the uniqueness of solutions to ordinary differential equations, it must hold that
+$y(x) = J_0(x)$.
+
+\section*{Question 2}
+
+The Bessel equation of order $\alpha = \frac{1}{2}$ is
+
+\begin{equation} \label{eq:2-1}
+    x^2y'' + xy + \left(x^2 - \frac{1}{4}\right)y = 0
+\end{equation}
+
+Let $y_1 = \sqrt{x}\sum_{n = 0}^\infty a_nx^n = \sum_{n = 0}^\infty a_n x^{n + \frac{1}{2}}$.
+Then $y_1' = \sum_{n = 0}(n + \frac{1}{2})a_nx^{n - \frac{1}{2}}$ and\\
+$y_1'' = \sum_{n = 0}(n + \frac{1}{2})(n - \frac{1}{2})a_nx^{n - \frac{3}{2}}$. For this to be a solution
+to (\ref{eq:2-1}) we require
+
+\begin{align*}
+    0 &= \sum_{n = 0}^\infty a_nx^{n + \frac{1}{2}}\left(n^2 - \frac{1}{4} + n + \frac{1}{2} - \frac{1}{4}\right)
+        + \sum_{n = 0}^\infty a_nx^{n + \frac{5}{2}}\\
+    &= \sum_{n = 0}^\infty a_nx^{n + \frac{1}{2}}n(n + 1)
+        + \sum_{n = 2}^\infty a_{n - 2}x^{n + \frac{1}{2}}\\
+    &= 2a_1x^{3/2} + \sum_{n = 2}^\infty x^{n + \frac{1}{2}}(n(n + 1)a_n + a_{n - 2})
+\end{align*}
+
+For this to hold we require $a_1 = 0$ and $a_n = -\frac{a_{n - 2}}{n(n + 1)}$. $a_1 = 0$ implies that
+$a_n = 0$ for all odd $n$. Choosing $a_0 = 1$, consider the claim that $a_{2n} = \frac{(-1)^n}{(2n + 1)!}$. Clearly
+this holds for $n = 0$. Suppose it holds for $n = k$. Then,
+
+\begin{align*}
+    a_{2(k + 1)} &= a_{2k + 2}\\
+    &= -\frac{a_{2k}}{(2k + 2)(2k + 3)}\\
+    &=  -\frac{(-1)^{k}}{(2k + 1)!(2k + 2)(2k + 3)}\\
+    &= \frac{(-1)^{k + 1}}{(2k + 3)!}\\
+    &= \frac{(-1)^{k + 1}}{(2(k + 1) + 1)!}
+\end{align*}
+
+Therefore, by the principle of induction, it holds that $a_{2n} = \frac{(-1)^n}{(2n + 1)!}$ for all integers $n \geq 0$.
+Thus, $y_1$ becomes
+
+\begin{align}
+    y_1(x) &= x^\frac{1}{2}\sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!}x^{2n}\nonumber\\
+    &= x^{-\frac{1}{2}} \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!}x^{2n + 1} \label{eq:2-2}
+\end{align}
+
+Similiarly, set $y_2 = x^{-\frac{1}{2}}\sum_{n = 0}^\infty a_nx^{n}
+= \sum_{n = 0}^\infty a_nx^{n - \frac{1}{2}}$ and so
+$y_2' = \sum_{n = 0}^\infty (n - \frac{1}{2})a_nx^{n - \frac{3}{2}}$ and\\
+$y_2'' = \sum_{n = 0}^\infty (n - \frac{1}{2})(n - \frac{3}{2})a_nx^{n - \frac{5}{2}}$.
+For this to be a solution to (\ref{eq:2-1}) we require
+
+\begin{align*}
+    0 &= \sum_{n = 0}^\infty a_nx^{n - \frac{1}{2}}\left(n^2 - 2n + \frac{3}{4} + n - \frac{1}{2} - \frac{1}{4}\right)
+        + \sum_{n = 0}^\infty a_nx^{n + \frac{3}{2}}\\
+    &= \sum_{n = 0}^\infty a_nx^n(n - 1) + \sum_{n = 2}^\infty a_{n - 2}x^{n - \frac{1}{2}}\\
+    &= \sum_{n = 2}^\infty x^{n - \frac{1}{2}}(a_nn(n - 1) + a_{n - 2})
+\end{align*}
+
+For this to hold we require $a_n = -\frac{a_{n - 2}}{n(n - 1)}$. Taking $a_0 = 1, a_1 = 0$ we have that $a_n = 0$ for all
+odd $n$. Consider the claim that $a_{2n} = \frac{(-1)^n}{(2n)!}$. This holds for $n = 0$. Suppose
+it holds for $n = k$. Then,
+
+\begin{align*}
+    a_{2(k + 1)} &= a_{2k + 2}\\
+    &= -\frac{a_{2k}}{(2k + 2)(2k + 1)}\\
+    &=  -\frac{(-1)^{k}}{(2k + 2)(2k + 1)(2k)!}\\
+    &= \frac{(-1)^{k + 1}}{(2k + 2)!}\\
+    &= \frac{(-1)^{k + 1}}{(2(k + 1))!}
+\end{align*}
+
+Therefore the formula for $a_{2n}$ holds by induction, and $y_2$ becomes
+
+\begin{equation} \label{eq:2-3}
+    y_2(x) = x^{-\frac{1}{2}} \sum_{n = 0}^\infty \frac{(-1)^n}{(2n)!} x^{2n}
+\end{equation}
+
+The power series in (\ref{eq:2-2}) and (\ref{eq:2-3}) are of $\sin x$ and $\cos x$,
+respectively. Therefore, the two derived solutions are
+
+\begin{align*}
+    y_1(x) = \frac{\sin x}{\sqrt{x}} && \text{and} && y_2(x) = \frac{\cos x}{\sqrt{x}}
+\end{align*}
+
+\section*{Question 3}
+
+By Theorem 12.2, (\ref{eq:1-1}) has a solution of the form
+
+\begin{equation} \label{eq:3-1}
+    y_2(x) = J_0(x)\ln x + \sum_{n = 0}^\infty g_k x^k
+\end{equation}
+
+where the wronskian of $J_0$ and $y_2$ is $W = \frac{1}{x}$. Therefore
+
+\begin{align*}
+    y_2 &= J_0 \int \frac{W}{J_0^2} dx\\
+    &= J_0 \int \frac{1}{xJ_0^2}
+\end{align*}
+
+By Theorem 12.1,
+
+\begin{align*}
+    J_0(x) &= 1 + \sum_{m = 1}^\infty \frac{(-1)^m}{(m!)^2} \left(\frac{x}{2}\right)^2m\\
+    &= 1 - \frac{x^2}{4} + \frac{x^4}{64} - \frac{x^6}{2304} + ...\\
+    \implies J_0^2 &= 1 - \frac{x^2}{4} + \frac{3x^4}{32} - \frac{5x^6}{768} + ...\\
+    \implies (xJ_0^2)^{-1} &= x^{-1}\left(1 - \frac{x^2}{4} + \frac{3x^4}{32} - \frac{5x^6}{768} + ...\right)^{-1}
+\end{align*}
+
+Applying a geometric series expansion for $(1 - t)^{-1}$, where
+$t = \frac{x^2}{4} - \frac{3x^4}{32} + \frac{5x^6}{768} - ...$,
+
+\begin{align*}
+    (xJ_0^2)^{-1} &= x^{-1}\left(1 + \frac{x^2}{4} - \frac{3x^4}{32} + \frac{5x^6}{768}
+        + \frac{x^4}{16} - \frac{3x^6}{64} + ...\right)\\
+    &= \frac{1}{x} + \frac{x}{4} - \frac{x^3}{32} - \frac{31x^5}{768} + ...
+\end{align*}
+
+Therefore
+
+\begin{align*}
+    y_2(x) &= J_0 \int \frac{1}{x} + \frac{x}{4} - \frac{x^3}{32} - \frac{31x^5}{768} + ...\\
+    &= J_0\ln x + J_0\left(\frac{x^2}{8} - \frac{x^4}{128} - \frac{31x^6}{4608} + ...\right)\\
+    &= J_0\ln x + \left(1 - \frac{x^2}{4} + \frac{x^4}{64} - \frac{x^6}{2304} + ...\right)
+    \left(\frac{x^2}{8} - \frac{x^4}{128} - \frac{31x^6}{4608} + ...\right)\\
+    &= J_0\ln x + \frac{x^2}{8} - \frac{5x^4}{128} - \frac{13x^6}{4608} + ...
+\end{align*}
+
+which is of the form of (\ref{eq:3-1}). Hence $g_k = 0$ for odd $k$ and the first few terms
+for even $k$ are $g_2 = \frac{1}{8}$, $g_4 = -\frac{5}{128}$ and $g_6 = -\frac{13}{4608}$.
+
+\section*{Question 4}
+
+Let
+
+\begin{equation} \label{eq:4-1}
+    y = 1 + \sum_{n = 1}^\infty a_nx^n
+\end{equation}
+
+be a solution to the hypergeometric equation
+
+\begin{equation} \label{eq:4-2}
+    x(1 - x)y'' + (c - (1 + a + b)x)y' - aby = 0
+\end{equation}
+
+for constant $a, b$ and $c$. The first and second derivatives of (\ref{eq:4-1}) are
+
+\begin{align*}
+    y' = \sum_{n = 1}^\infty na_nx^{n - 1} && \text{and} && y'' = \sum_{n = 1}^\infty n(n - 1)a_nx^{n - 2}
+\end{align*}
+
+Substituting these into (\ref{eq:4-2}),
+
+\begin{align*}
+    0 &= \sum_{n = 1}^\infty n(n - 1)a_nx^{n - 1} - \sum_{n = 1}^\infty n(n - 1)a_nx^n
+        + \sum_{n = 1}^\infty cna_nx^{n - 1} - \sum_{n = 1}^\infty (1 + a + b)na_nx^{n}\\
+    &\text{\tab\tab} - ab - \sum_{n = 1}^\infty aba_nx^n\\
+    &= \sum_{n = 1}^\infty x^{n - 1}a_n(n(n - 1) + cn)
+        - \sum_{n = 1}^\infty x^na_n(n(n - 1) + (1 + a + b)n + ab) - ab\\
+    &= \sum_{n = 0}^\infty x^{n}a_{n + 1}(n(n + 1) + c(n + 1))
+        - \sum_{n = 1}^\infty x^na_n(n(n + a + b) + ab)) - ab\\
+    &= a_1c - ab + \sum_{n = 1}^\infty x^{n}(a_{n + 1}(n + 1)(n + c) - a_n(n + a)(n + b))
+\end{align*}
+
+For this to hold we require $a_1 = \frac{ab}{c}$ and $a_{n + 1} = a_n\frac{(n + a)(n + b)}{(n + 1)(n + c)}$
+
+\newpage
+Consider the claim that
+
+\begin{equation} \label{eq:4-3}
+    a_n = \frac{1}{n!}\prod_{m = 0}^{n - 1} \frac{(m + a)(m + b)}{m + c}
+\end{equation}
+
+for integer $n \geq 1$. $a_1 = \frac{ab}{c}$ satisfies the claim. Suppose the claim holds
+for $n = k$. Then
+
+\begin{align*}
+    a_{k + 1} &= a_k \frac{(k + a)(k + b)}{(k + 1)(k + c)}\\
+    &= \frac{1}{(k + 1)k!} \frac{(k + a)(k + b)}{k + c} \prod_{m = 0}^{k - 1} \frac{(m + a)(m + b)}{m + c}\\
+    &= \frac{1}{(k + 1)!} \prod_{m = 0}^{k} \frac{(m + a)(m + b)}{m + c}\\
+    &= \frac{1}{(k + 1)!} \prod_{m = 0}^{(k + 1) - 1} \frac{(m + a)(m + b)}{m + c}
+\end{align*}
+
+and so $a_{k + 1}$ satisfies (\ref{eq:4-3}) whenever $a_{k}$ does. Therefore (\ref{eq:4-3}) holds
+for all integers $n \geq 1$. Therefore, (\ref{eq:4-2}) has solutions of the form
+
+\begin{equation*}
+    y = 1 + \sum_{n = 1}^\infty \frac{x^n}{n!}\prod_{m = 0}^{n - 1} \frac{(m + a)(m + b)}{m + c}
+\end{equation*}
+
+\end{document}

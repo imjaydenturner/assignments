@@ -1,0 +1,179 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\setlength{\parindent}{0pt}
+
+\title{PMTH339 Assignment 1}
+\date{20 July 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+\begin{equation} \label{eq:1-1}
+    y' + \frac{3}{x}y = \frac{2}{x^2}
+\end{equation}
+
+Set $I(x) = e^{\int \frac{3}{x}dx} = e^{3\ln x} = x^3$, and multiply both sides of (\ref{eq:1-1}) to get
+
+\begin{equation} \label{eq:1-2}
+    x^3y' + 3x^2y = 2x
+\end{equation}
+
+By the chain rule, the LHS of (\ref{eq:1-2}) is equal to $\frac{d}{dx}(x^3y)$. Integrating both sides with respect to $x$, we solve for
+the general solution $y(x)$ as follows:
+
+\begin{align}
+    \int \frac{d}{dx}(x^3y) dx &= \int 2x dx + c \nonumber \\
+    x^3y &= x^2 + c \nonumber \\
+    \implies y(x) &= \frac{1}{x} + \frac{c}{x^2} \label{eq:1-3}
+\end{align}
+
+for $c \in \mathbb{R}$ and $x \neq 0$. Given the condition $y(2) = -1$, we can solve for the constant $c$.
+
+\begin{align*}
+    -1 &= \frac{1}{2} + \frac{c}{4}\\
+    -\frac{3}{2} &= \frac{c}{4}\\
+    \implies c &= -6
+\end{align*}
+
+Therefore, the particular solution to the differential equation (\ref{eq:1-1}) with the initial condition $y(2) = -1$ is
+
+\begin{equation*}
+    y(x) = \frac{1}{x} - \frac{6}{x^2}
+\end{equation*}
+
+\section*{Question 2}
+
+\begin{equation} \label{eq:2-1}
+    y' = \frac{1 + y^2}{1 + x^2}
+\end{equation}
+
+Equation (\ref{eq:2-1}) is of the form $y' = p(x)q(y)$ and $q(y) = 1 + y^2 \neq 0$, so is therefore a seperable first order differential equation. As such,
+it can be solved by evaluating
+
+\begin{equation} \label{eq:2-2}
+    \int \frac{1}{1 + y^2}dy = \int \frac{1}{1 + x^2}dx + c
+\end{equation}
+
+for $c \in \mathbb{R}$, and solving for $y$. Both integrands are recognised as the derivative of arctan. Therefore the general solution $y(x)$ can be found:
+
+\begin{align}
+    (\ref{eq:2-2}) \implies \arctan (y) &= \arctan (x) + c \nonumber \\
+    \implies y(x) &= \tan (\arctan (x) + c) \label{eq:2-3}
+\end{align}
+
+Using the intial condition $y(2) = 1$ gives
+
+\begin{align}
+    1 &= \tan (\arctan (2) + c) \nonumber \\
+    \arctan (1) &= \arctan (2) + c \nonumber \\
+    \implies c &= \frac{\pi}{4} - \arctan (2) \label{eq:2-4}
+\end{align}
+
+Therefore, the particular solution of the differential equation (\ref{eq:2-1}) corresponding to initial condition $y(2) = 1$ is
+
+\begin{equation}
+    y(x) = \tan (\arctan (x) + \frac{\pi}{4} - \arctan (2)) \label{eq:2-5}
+\end{equation}
+
+To find where this solution is valid, we note that $\tan x$ is defined for $|x| < \frac{\pi}{2}$. We therefore find bounds on $x$ as
+
+\begin{align*}
+    -\frac{\pi}{2} < &\arctan x + \frac{\pi}{4} - \arctan(2) < \frac{\pi}{2}\\
+    \arctan(2) - \frac{3\pi}{4} < &\arctan x < \arctan(2) + \frac{\pi}{4}\\
+    \tan\left(\arctan(2) - \frac{3\pi}{4}\right) < &x < \tan\left(\arctan(2) + \frac{\pi}{4}\right)\\
+\end{align*}
+
+\section*{Question 3}
+
+\begin{equation} \label{eq:3-1}
+    y' = \frac{y + x}{y - x}
+\end{equation}
+
+Let $y = ux$, where $u \in \mathbb{R}$. This is a solution of (\ref{eq:3-1}) if and only if
+
+\begin{align}
+    u &= \frac{ux + x}{ux - x} \nonumber\\
+    &= \frac{u + 1}{u - 1} \nonumber\\
+    \implies u^2 - 2u - 1 &= 0 \label{eq:3-2}
+\end{align}
+
+Equation (\ref{eq:3-2}) has roots $u = 1 \pm \sqrt{2}$, so therefore $y = (1 \pm \sqrt{2})x$ are solutions to the differential equation.
+
+\section*{Question 4}
+
+\begin{equation} \label{eq:4-1}
+    y'' + 4y' + 5y = 0
+\end{equation}
+
+Equation (\ref{eq:4-1}) is a second order homogenous differential equation. Therefore $y = e^{\lambda x}$ is a solution if and only if
+$\lambda^2 + 4\lambda + 5 = 0$. The solutions to this polynomial are $\lambda = -2 \pm i$. Therefore, the general solution and its
+first derivative are
+
+\begin{align}
+    y &= 2^{-2x}(C_1\cos x + C_2\sin x) \label{eq:4-2}\\
+    y' &= e^{-2x}((C_2 - 2C_1)\cos x - (C_1 - 2C_2)\sin x) \label{eq:4-3}
+\end{align}
+
+for $C_1, C_2 \in \mathbb{C}$. Given the initial condition $y(0) = 1, y'(0) = 0$, we get
+
+\begin{align*}
+    (\ref{eq:4-2}) \implies 1 &= C_1\cdot 1 + C_2\cdot 0\\
+    \therefore C_1 &= 1\\
+    (\ref{eq:4-3}) \implies 0 &= C_2 - 2C_1\\
+    \therefore C_2 &= 2
+\end{align*}
+
+Therefore the particular solution according to this initial condition is $y(x) = e^{-2x}(\cos x + 2\sin x)$. Given the initial condition
+$y(0) = 12, y'(0) = -5$, we get
+
+\begin{align*}
+    (\ref{eq:4-1}) \implies C_1 &= 12\\
+    (\ref{eq:4-3}) \implies -5 &= C_2 - 2C_1\\
+    \therefore C_2 &= 19
+\end{align*}
+
+Therefore the particular solution according to this initial condition is $y(x) = e^{-2x}(12\cos x + 19\sin x)$.
+
+\end{document}

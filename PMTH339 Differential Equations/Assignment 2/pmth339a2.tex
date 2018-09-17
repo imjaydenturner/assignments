@@ -1,0 +1,234 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\setlength{\parindent}{0pt}
+
+\title{PMTH339 Assignment 2}
+\date{27 July 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+\begin{equation} \label{eq:1-1}
+    x^2y'' + 3xy' + y = 0
+\end{equation}
+
+For $x < 0, y = (-x)^s$ is a solution to (\ref{eq:1-1}) iff
+
+\begin{align*}
+    x^2s(s - 1)x^{s - 2} - 3sxx^{s - 1} + x^2 &= 0\\
+    x^s(s^2 - 4s + 1) &= 0\\
+    \implies s &= 2 \pm \sqrt{3}
+\end{align*}
+
+Therefore, $y_1 = A(-x)^{2 + \sqrt{3}}$ and $y_2 = B(-x)^{2 - \sqrt{3}}$ are solutions. To show that these form a fundamental pair, consider the
+Wronskian $W$:
+
+\begin{align*}
+    W &= y_1y_2' - y_2y_1'\\
+    &= A(-x)^{2 + \sqrt{3}}(-B)(2 - \sqrt{3})(-x)^{1 - \sqrt{3}} - B(-x)^{2 - \sqrt{3}}(-A)(2 + \sqrt{3})(-x)^{1 + \sqrt{3}}\\
+    &= AB((\sqrt{3} - 2)(-x)^3 + (\sqrt{3} + 2)(-x)^3)\\
+    &= -2AB\sqrt{3}x^3
+\end{align*}
+
+which is never zero for $x < 0$. Hence $y_1$ and $y_2$ form a fundamental pair of solutions for (\ref{eq:1-1}), and the general solution for $x < 0$ is
+
+\begin{equation} \label{eq:1-2}
+    y = A(-x)^{2 + \sqrt{3}} + B(-x)^{2 - \sqrt{3}}
+\end{equation}
+
+it's derivative is
+
+\begin{equation} \label{eq:1-3}
+    y' = -A(2 + \sqrt{3})(-x)^{1 + \sqrt{3}} - B(2 - \sqrt{3})(-x)^{1 - \sqrt{3}}
+\end{equation}
+
+Substituting the initial conditions $y(-1) = 3$ and $y'(-1) = 4$ into $(\ref{eq:1-2})$ and $(\ref{eq:1-3})$ gives the pair of equations for $A$ and $B$
+
+\begin{align*}
+    A + B = 3 && -(2 + \sqrt{3})A - (2 - \sqrt{3})B = 4
+\end{align*}
+
+Solving this system gives us $A = \frac{3}{2} - \frac{5\sqrt{3}}{3}$ and $B = \frac{3}{2} + \frac{5\sqrt{3}}{3}$. Therefore the particular solution according to
+the given initial conditions and for $x < 0$ is
+
+\begin{equation*}
+    y(x) = \left(\frac{3}{2} - \frac{5\sqrt{3}}{3}\right)(-x)^{2 + \sqrt{3}} + \left(\frac{3}{2} + \frac{5\sqrt{3}}{3}\right)(-x)^{2 - \sqrt{3}}
+\end{equation*}
+
+\section*{Question 2}
+
+\begin{equation} \label{eq:2-1}
+    y''' - 3y' + 2y = 0
+\end{equation}
+
+Let $y_1 = e^x$. Then $y_1' = y_1''' = e^x$. Therefore
+
+\begin{equation*}
+    y_1''' - 3y' + 2y = e^x - 3e^x + 2e^x = 0
+\end{equation*}
+
+So $y_1$ is a solution. Let $y_2 = xe^x$. Then $y_2' = xe^x + e^x$, $y_2' = xe^x + 2e^x$ and $y_2''' = xe^x + 3e^x$. Therefore
+
+\begin{equation*}
+    y_2''' - 3y_2' + 2y_2 = xe^x + 3e^x - 3xe^x - 3e^x + 2xe^x = 0
+\end{equation*}
+
+So $y_2$ is a solution. Let $y_3 = e^{-2x}$. Then $y_3' = -2e^{-2x}$, $y_3'' = 4e^{-2x}$ and $y_3''' = -8e^{-2x}$. Therefore,
+
+\begin{equation*}
+    y_3''' - 3y_3' + 2y_3 = -8e^{-2x} + 6e^{-2x} + 2e^{-2x} = 0
+\end{equation*}
+
+So $y_3$ is a solution. Let $y = Ay_1 + By_2 + Cy_3$ satisfy the initial conditions $y(0) = 1, y'(0) = 0, y''(0) = 0$. This gives rise to the system of equations
+for $A, B$ and $C$:
+
+\begin{align*}
+    A + C &= 1\\
+    A + 2B - 2C &= 0\\
+    A + 2B + 4C &= 0
+\end{align*}
+
+which has solution $A = \frac{8}{3}$, $B = -2$ and $C = \frac{1}{3}$. Substitute $y$ with these coefficients into (\ref{eq:2-1}) to check if $y$ is a solution. Firstly, note that
+
+\begin{align*}
+    y &= \frac{8}{3}e^x - 2xe^x + \frac{1}{3}e^{-2x}\\
+    y' &= \frac{2}{3}e^x - 2xe^x - \frac{2}{3}e^{-2x}\\
+    y'' &= -\frac{4}{3}e^x - 2xe^x + \frac{4}{3}e^{-2x}\\
+    y''' &= -\frac{10}{3}e^x - 2xe^x - \frac{8}{3}e^{-2x}
+\end{align*}
+
+Therefore,
+
+\begin{align*}
+    y''' - 3y' + 2y &= \left(-\frac{10}{3} - 2 + \frac{16}{3}\right)e^x + (-2 + 6 - 4)xe^x + \left(-\frac{8}{3} + \frac{6}{3} + \frac{2}{3}\right)e^{-2x}\\
+    &= 0e^x + 0xe^x + 0e^{-2x}\\
+    &= 0
+\end{align*}
+
+Therefore $y$ as defined is a solution to third order linear differential equation (\ref{eq:2-1}) satisfying the given initial conditions.
+
+\section*{Question 3}
+
+\begin{align}
+    (1 - x^2)y'' - xy' + 4y &= 0 \label{eq:3-1}\\
+    \implies y'' - \frac{x}{1 - x^2}y' + \frac{4}{1 - x^2}y = 0 \label{eq:3-2}
+\end{align}
+
+The existence-uniqueness theorem states that if $p(x) = -\frac{x}{1 - x^2}$ and $q(x) = \frac{4}{1 - x^2}$ are continuous on an interval $I$,
+then there exists a unique solution on $I$ that satisfies given initial conditions. $p$ and $q$ are continous everywhere except at
+$1 - x^2 = 0 \implies x = \pm 1$. Therefore, solutions to (\ref{eq:3-1}) are guaranteed on the intervals $I_1 = (-\infty, -1)$, $I_2 = (-1, 1)$ and
+$I_3 = (1, \infty)$.
+
+\hfill \break
+Let $y_1 = 1 - 2x^2$. Then $y_1' = -4x$ and $y_1'' = -4$. Substituting into (\ref{eq:3-1}),
+
+\begin{equation*}
+    (1 - x^2)(-4) - x(-4x) + 4(1 - 2x^2) = -4 + 4x^2 + 4x^2 + 4 - 8x^2 = 0
+\end{equation*}
+
+and so $y_1$ is a solution. To find a second solution $y_2$, we first calculate the Wronskian $W$ as
+
+\begin{equation*}
+    W(x) = e^{-\int p(x) dx} = e^{\int \frac{x}{1 - x^2} dx}
+\end{equation*}
+
+Let $u = 1 - x^2 \implies \frac{du}{dx} = -2x$. Therefore the expression becomes
+
+\begin{equation*}
+    W(x) = e^{-\frac{1}{2}\int \frac{1}{u} du} = e^{-\frac{1}{2}\ln u} = u^{-1/2} = \frac{1}{\sqrt{1 - x^2}}
+\end{equation*}
+
+$y_2$ can then be calculated as
+
+\begin{align*}
+    y_2 &= y_1 \int \frac{W}{y_1^2} dx\\
+    &= (1 - 2x^2) \int \frac{1}{\sqrt{1 - x^2}(1 - 2x^2)^2} dx
+\end{align*}
+
+For the integrand, let $x = \sin u$. Then the integral becomes
+
+\begin{equation*}
+    \int \frac{\cos u}{\sqrt{1 - \sin^2u}(1 - 2\sin^2 u)^2} du = \int \frac{1}{\cos^2(2u)} du = \frac{1}{2}\tan(2u) + c
+\end{equation*}
+
+where $c \in \mathbb{R}$. Substituting $u = \sin^{-1} x$,
+
+\begin{align*}
+    \frac{1}{2}\tan(2u) &= \frac{\sin 2u}{2\cos 2u}\\
+    &= \frac{\sin u \cos u}{\cos^2u - \sin^2u}\\
+    &= \frac{x\sqrt{1 - \sin^2u}}{1 - \sin^2u - \sin^2u}\\
+    &= \frac{x\sqrt{1 - x^2}}{1 - 2x^2}
+\end{align*}
+
+Therefore we get a second solution
+
+\begin{align*}
+    y_2 &= (1 - 2x^2)\left(\frac{x\sqrt{1 - x^2}}{1 - 2x^2} + c\right)\\
+    &= x\sqrt{1 - x^2} - 2cx^2 + c
+\end{align*}
+
+for $c \in \mathbb{R}$
+
+\section*{Question 4}
+
+
+\begin{equation} \label{eq:4-1}
+    y' = x^2 + y^2
+\end{equation}
+
+Substitute for some function $u$, $y = -\frac{u'}{u}$. Thus $y' = -\left(\frac{u''u - (u')^2}{u^2}\right)$ and (\ref{eq:4-1}) becomes
+
+\begin{align}
+    \frac{(u')^2 - uu''}{u^2} &= x^2 + \frac{(u')^2}{u^2}\nonumber\\
+    (u')^2 - uu'' &= x^2u^2 + (u')^2\nonumber\\
+    \implies u'' + x^2 u &= 0 \label{eq:4-2}
+\end{align}
+
+Question 5 of Assignment 1 asks about the behaviour of the solution to (\ref{eq:4-1}) with the initial condition $y(0) = 0$. With the above
+substitution, we require then that $y(0) = \frac{u'(0)}{u(0)} = 0 \implies u'(0) = 0 \implies u(0) = c$ for some constant $c \in \mathbb{R}\backslash\{0\}$. Therefore,
+an equivalent problem to Question 5 of Assignment 1 is to show that the solution $u(x)$ to the second order differential equation (\ref{eq:4-2}) satisfying the initial conditions
+$u(0) = 0, u'(0) = c$ has a vertical asymptote.
+
+\end{document}

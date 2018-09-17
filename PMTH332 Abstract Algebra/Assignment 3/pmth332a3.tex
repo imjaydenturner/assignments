@@ -1,0 +1,154 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\setlength{\parindent}{0pt}
+
+\title{PMTH332 Assignment 3}
+\date{4 August 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+Consider $g \in \text{ker(Inn)}$. That is, $g \in G$ such that $\phi_g = \text{id}_G$. Then
+
+\begin{align*}
+    \phi_g(x) = gxg^{-1} &= x, \forall x \in G\\
+    \iff gx &= xg, \forall x \in G\\
+    \iff g &= xgx^{-1}, \forall x \in G\\
+    \iff g &\in C(G)
+\end{align*}
+
+Therefore, $\text{ker(Inn)} \subseteq C(G)$. Now let $x \in C(G)$. Then $x$ commutes with all elements of $G$, i.e.
+
+\begin{align}
+    gxg^{-1} &= x, \forall x \in G \nonumber\\
+    \iff gx &= xg, \forall x \in G \nonumber\\
+    \iff xgx^{-1} &= g, \forall x \in G \label{eq:1-1}
+\end{align}
+
+By definition, $\text{Inn}(x) = \phi_x:G \to G$ is defined as $\phi_x(y) = xyx^{-1}$. By (\ref{eq:1-1}),
+$\phi_x(y) = xyx^{-1} = y, \forall y \in G$, so $\phi_x = \text{id}_G$ i.e. $\phi_x \in \text{ker(Inn)}$.
+Hence $C(G) \subseteq \text{ker(Inn)} \implies \text{ker(Inn)} = C(G)$.
+
+\section*{Question 2}
+
+Let $H$ be a subgroup of $G$ of index two. That is, $H$ has two cosets in $G$. Take $g \in G$. As the cosets of $H$ are the equivalence
+classes of the equivalence relation $\sim_H$, these cosets partition $G$ into two subsets. Therefore, for the left cosets of $H$ there are two possibilities:
+
+\begin{align*}
+    g \in H \implies gH = H\\
+    g \notin H \implies gH = G\backslash H
+\end{align*}
+
+Likewise, for the right cosets of $H$,
+
+\begin{align*}
+    g \in H \implies Hg = H\\
+    g \notin H \implies Hg = G\backslash H
+\end{align*}
+
+Thus $gH = Hg, \forall g \in G$, which by Lemma 6.8, implies $H$ is normal in $G$.
+
+\section*{Question 3}
+
+Let $f_g:G \to G$, $x \mapsto gx$ be defined for all $g \in G$. Then $f_g^{-1}$ exists and is given by $f_{g^{-1}} = g^{-1}x$. Thus,
+each $f_g$ is a bijection. Consider the set $H := \{f_g | g \in G\}$ with the binary operation of composition of functions. Then,
+as each element of $H$ has an inverse such that $f_g\circ f_{g^{-1}} = \text{id}_G$, where $\text{id}_G = e_H$ is the neutral element
+of $H$, $H$ is a group. Specifically, it is a group of bijections on $|G| = n$ elements i.e. $H \subseteq S_n$.
+
+\hfill \break
+Define $\phi:G \to K, g \mapsto f_g$. To show that this is a homomorphism, observe that
+
+\begin{align*}
+    \phi(xy)(g) &= f_{xy}(g)\\
+    &= xyg\\
+    &= x(yg)\\
+    &=f_x(f_y(g))\\
+    &= (f_x \circ f_y)(g)
+\end{align*}
+
+By definition, $\phi$ is surjective. Let $g \in G$ such that $\phi(g) = \text{id}_G$. That is,
+$\forall x \in G, f_g(x) = gx = x \implies g = e$ by cancellation. Therefore the kernal of $\phi$ is trivial and so $\phi$ is injective.
+Thus, $\phi$ is a bijective homomorphism i.e. an isomorphism, and
+
+\begin{equation*}
+    G \cong H \leq S_n
+\end{equation*}
+
+\section*{Question 4}
+
+i) As $H$ and $N$ are subgroups of $G$, $e \in H, N \implies e \in HN$, so $HN$ is nonempty. Take $x, y \in HN$ such that
+$x = h_1n_1$ and $y = h_2n_2$. Then
+
+\begin{align*}
+    xy^{-1} &= h_1n_1(h_2n_2)^{-1}\\
+    &= h_1n_1n_2^{-1}h_2^{-1}\\
+    &= h_1h_2^{-1}(h_2n_1n_2^{-1}h_2^{-1})
+\end{align*}
+
+As $H$ is a group, $h_1h_2^{-1} \in H$. As $N$ is a normal subgroup, $h_2n_1n_2^{-1}h_2^{-1} \in N$. Therefore,
+$xy^{-1} \in HN$ given $x, y \in HN$, hence $HN \leq G$.
+
+\hfill \break
+ii) As $H$ and $N$ are subgroups of $G$, given $h \in H$ and $n \in N$, we have $h = he \in HN$ and $n = en \in HN$. Therefore
+$HN$ contains both $H$ and $N$.
+
+\hfill \break
+Let $K$ be another subgroup of $G$ containing $H$ and $N$. Then $K$ is closed as a group, so $K$ contains all elements that are products
+of other elements of $K$. Therefore $K$ contains all elements of the form $hn, h \in H, n \in N$ i.e. $K$ contains $HN$. Therefore as $HN$ is contained
+in any other subgroup of $G$ containing $H$ and $N$, $HN$ is the smallest group to do so.
+
+\hfill \break
+iii) Suppose $H$ is normal in $G$. Then it holds that $gH = Hg$ and $gN = Ng, \forall g \in G$. Therefore,
+
+\begin{align*}
+    gHN &= \{ghn | h \in H, n \in N\}\\
+    &= \{hgn | h \in H, n \in N\}\\
+    &= \{hng | h \in H, n \in N\}\\
+    &= HNg
+\end{align*}
+
+thus $HN$ is normal in $G$.
+
+\end{document}

@@ -1,0 +1,142 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\setlength{\parindent}{0pt}
+
+\title{PMTH332 Assignment 2}
+\date{28 July 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+Let $\phi := \ln:\mathbb{R}^+ \rightarrow \mathbb{R}, x \mapsto \ln x$. For $x, y \in H$, $\ln(xy) = \ln x + \ln y$, so $\phi$ is a homomorphism.
+Now let $\psi := \text{exp}:\mathbb{R} \rightarrow \mathbb{R}^+, x \mapsto e^x$. Then $e^{x + y} = e^x e^y$, so $\psi$ is a homomorphism. Further,
+$\psi = \phi^{-1}$, so $\phi$ is an isomorphism. Therefore, $G \cong H$.
+
+\section*{Question 2}
+
+Let $\phi: G \rightarrow H$ and $\psi: H \rightarrow K$ be isomorphisms. Then there exists inverses $\phi^{-1}: H \rightarrow G$ and $\psi^{-1}: K \rightarrow H$
+of $\phi$ and $\psi$. By Proposition 3.6, $\psi \circ \phi$ is a homomorphism. Observe that
+
+\begin{align*}
+    (\phi^{-1} \circ \psi^{-1}) \circ (\psi \circ \phi) &= \phi^{-1} \circ (\psi^{-1} \circ (\psi \circ \phi))\\
+    &= \phi^{-1} \circ((\psi^{-1} \circ \psi) \circ \phi)\\
+    &= \phi^{-1} \circ(id_H \circ \phi)\\
+    &= \phi^{-1} \circ \phi\\
+    &= id_G
+\end{align*}
+
+\begin{align*}
+    (\psi \circ \phi) \circ (\phi^{-1} \circ \psi^{-1}) &= (\psi \circ (\phi \circ (\phi^{-1} \circ \psi^{-1}))\\
+    &= \psi \circ ((\phi \circ \phi^{-1}) \circ \psi^{-1})\\
+    &= \psi \circ (id_G \circ \psi^{-1}\\
+    &= \psi \circ \psi^{-1}\\
+    &= id_K
+\end{align*}
+
+Therefore $\psi \circ \phi: G \rightarrow K$ has inverse $\phi^{-1} \circ \psi^{-1}: K \rightarrow G$ and is an isomorphism.
+
+\section*{Question 3}
+
+Let $H \subseteq G$ and define $x \sim_H y : \leftrightarrow xy^{-1} \in H$.
+
+\hfill \break
+Suppose $H \leq G$. Then if $x \in H$, $e = xx^{-1} \in H$. Therefore, $x \sim_H x$.
+
+\hfill \break
+As $H$ is a subgroup, for $x \in y$, $xy^{-1} \in H$. By the existence of inverses in groups, we thus have $(xy^{-1})^{-1} = yx^{-1} \in H$. Therefore, if
+$x \sim_H y$ then $y \sim_H x$.
+
+\hfill \break
+If $x, y, z \in H$ we have $xy^{-1} \in H$ and $yz^{-1} \in H$. By closure of multiplication in groups, we then have
+$(xy^{-1})(yz^{-1}) = xz^{-1} \in H$. Therefore $\sim_H$ is transitive and thus satisfies all criteria of an equivalence relation
+
+\hfill \break
+Conversely, suppose that $H \subseteq G$ and $x \sim_H y : \leftrightarrow xy^{-1} \in H$ defines an equivalence relation. Consider for $x \in H$ the equivalence class
+$[x] = \{y \in H | xy^{-1} \in H\}$. By reflexivity of $\sim_H$, we have $x \in [x] \implies xx^{-1} = e \in H$. Let $h \in H$ and suppose that $h \notin [x]$. Then
+$xh^{-1} \notin H$. However, as equivalence relations partition the set they act upon, there is some $y \in H$ such that $h \in [y] \implies yh^{-1} \in H$. Therefore,
+given $x, y \in H$ we must have that $xy^{-1} \in H$ and thus $H$ is a subgroup of $G$.
+
+\section*{Question 4}
+
+a) Let $\phi, \psi \in \text{Aut}(G)$. Then both $\phi^{-1}: G \rightarrow G$ and $\psi^{-1}: G \rightarrow G$ exist and are in $\text{Aut}(G)$. Further,
+$\upsilon := \phi \circ \psi^{-1}: G \rightarrow G$ is an isomorphism by the result of Question 2, and is therefore in Aut$(G)$. Therefore, by Proposition 4.5, 
+Aut$(G) \leq S(G)$.
+
+\hfill \break
+b) Let $g \in G$ and define $\phi_g: G \rightarrow G, x \mapsto gxg^{-1}$. As $G$ is a group, it is closed under multiplication, so the function is
+well defined. Consider $x, y \in G$. Then,
+
+\begin{equation*}
+    \phi_g(xy) = gxyg^{-1} = gxg^{-1}gyg^{-1} =\phi_g(y)\phi_g(y)
+\end{equation*}
+
+so $\phi_g$ is a homomorphism. Now let $x, x' \in G$ such that $\phi_g(x) = \phi_g(x')$. Then,
+
+\begin{align*}
+    gxg^{-1} &= gx'g^{-1}\\
+    gxg^{-1}g &= gx'g^{-1}g\\
+    g^{-1}xe &= g^{-1}gx'e\\
+    ex &= ex'\\
+    \implies x &= x'
+\end{align*}
+
+So $\phi_g$ is injective. Now let $y \in G$. Define $x = g^{-1}yg$. Then
+
+\begin{equation*}
+    \phi_g(x) = \phi_g(g^{-1}yg) = gg^{-1}yg^{-1}g = eye = y
+\end{equation*}
+
+So $\phi_g$ is surjective and thus bijective. Therefore, $\phi_g$ is an isomorphism from $G$ to $G$ and is thus an automorphism.
+
+\hfill \break
+c) Let $x, y \in G$. Then Inn$(xy) = \phi_{xy}$. Let $g \in G$. Then,
+
+\begin{equation*}
+    \phi_{xy}(g) = xyg(xy)^{-1} = xygy^{-1}x^{-1} = x(ygy^{-1})x^{-1} = \phi_x(\phi_y(g)) = (\phi_x \circ \phi_y)(g)
+\end{equation*}
+
+Therefore, Inn$(xy) = \phi_{xy} = \phi_x \circ \phi_y$, so Inn is a homomorphism.
+
+\end{document}

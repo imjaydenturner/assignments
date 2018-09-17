@@ -1,0 +1,87 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0pt}
+
+\iffalse <Subject> Assignment <Assignment number> \fi
+\title{PMTH332 Assignment 5}
+\iffalse <dd> <Month> <yyyy> \fi
+\date{22 September 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+Consider the two non-zero matrices $A, B \in M(2; R)$ defined by
+
+\begin{align*}
+    A = \begin{pmatrix}
+        a & 0\\
+        0 & 0
+    \end{pmatrix}
+    &&
+    B = \begin{pmatrix}
+        0 & 0\\
+        0 & a
+    \end{pmatrix}
+\end{align*}
+
+then $AB = 0$, so $M(2; R)$ has zero divisors. Consider matrix $C$ given by
+
+\begin{align*}
+    C = \begin{pmatrix}
+        0 & a\\
+        0 & 0
+    \end{pmatrix}
+\end{align*}
+
+then $AC = \begin{pmatrix}0 & a^2\\0 & 0\end{pmatrix}$ and $CA = 0$,
+so $M(2; R)$ is not commutative.
+
+\section*{Question 2}
+
+\section*{Question 3}
+
+\section*{Question 4}
+
+\end{document}

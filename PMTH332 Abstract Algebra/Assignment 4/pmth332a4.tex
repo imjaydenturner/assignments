@@ -1,0 +1,117 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0pt}
+
+\iffalse <Subject> Assignment <Assignment number> \fi
+\title{PMTH332 Assignment 4}
+\iffalse <dd> <Month> <yyyy> \fi
+\date{25 August 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+Let $M$ and $N$ be normal subgroups of $G$ such that
+$M \trianglelefteq N \trianglelefteq G$. Consider $N/M \trianglelefteq G/M$. If $M$
+is a maximal normal subgroup of $G$, then either
+
+\begin{align*}
+    N &= G & \text{or} && N &= M\\
+    \implies N/M &= G/M & && \implies N/M &= M/M = \{M\}
+\end{align*}
+
+Therefore the only two normal subgroups of $G/M$ are $G/M$ and $\{M\}$, which is the
+identity element. Therefore $G/M$ is simple.
+
+\hfill \break
+Suppose $M \trianglelefteq G$ and $G/M$ is simple. If
+$M \trianglelefteq N \trianglelefteq G$, then $N/M \trianglelefteq G/M$. As $G/M$
+is simple, either $N/M = G/M \implies N = G$ or $N/M = \{M\} \implies N = M$. Therefore
+$M$ is a maximal normal subgroup of $G$.
+
+\section*{Question 2}
+
+Let $m = \text{ord}(a_1, ..., a_n)$. Then
+
+\begin{equation} \label{eq:2-1}
+    (a_1, ..., a_n)^m = (a_1^m, ..., a_n^m) = (e_1, ..., e_n)
+\end{equation}
+
+where $e_i$ is the identity element of group $G_i$. Therefore, for each $a_i$, there
+exists an integer $q_i$ such that $m = q_i\text{ord}(a_i)$. As $m$ is the smallest
+positive integer such that (\ref{eq:2-1}) holds, $m$ must be the least common
+multiple of the orders of each $a_i$. That is,
+
+\begin{equation*}
+    \text{ord}(a_1, ..., a_n) = \text{lcm}(\text{ord}(a_1), ..., \text{ord}(a_n))
+\end{equation*}
+
+\section*{Question 3}
+
+Consider the group
+
+\begin{equation} \label{eq:3-1}
+(\mathbb{Z}/m\mathbb{Z})\times(\mathbb{Z}/n\mathbb{Z})
+    = \{(a, b) | a \in \mathbb{Z}/m\mathbb{Z}, b \in \mathbb{Z}/m\mathbb{Z}\}
+\end{equation}
+
+This group has $mn$ elements and is cyclic. By the result of Question 2,
+the order of (\ref{eq:3-1}) is $d = \text{lcm}(m, n)$.
+
+\hfill \break
+By the classification of cyclic groups, this group is isomorphic to
+$\mathbb{Z}/mn\mathbb{Z}$ if and only if the order $d = mn$. That is,
+if and only if $d = \text{lcm}(m, n) = mn = \text{lcm}(m, n)\text{gcd}(m, n)$.
+Therefore, $(\mathbb{Z}/m\mathbb{Z})\times(\mathbb{Z}/n\mathbb{Z})
+\cong \mathbb{Z}/mn\mathbb{Z}$ if and only if $\text{gcd}(m, n) = 1$.
+
+\newpage
+\section*{Question 4}
+
+The prime factorisation of $324$ is $324 = 2^2\cdot 3^4$. By the first Sylow theorem,
+$G$ has subgroups of orders $2, 2^2 = 4, 3, 3^2 = 9, 3^3 = 27$ and $3^4 = 81$. Let $H$
+be a subgroup of $G$ of order $10$. Then there is an element $g \in G$
+of order $10$. By Corollary 6.17, it must hold that $\text{ord}(g)||G|$. However,
+$10 \nmid 324$, so this is a contradiction, and $G$ has no subgroups of order $10$.
+\end{document}
