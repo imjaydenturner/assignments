@@ -80,9 +80,23 @@ so $M(2; R)$ is not commutative.
 
 \section*{Question 2}
 
-Let $F$ be a finite integral domain and take $x \in F$. As $F$ is a domain,
-there are no zero divisors. Therefore $x$ is a unit by Proposition
-13.21. That is, $\exists x^{-1} \in F$ where $xx^{-1} = x^{-1}x = 1$.
+Let $F$ be a finite integral domain and take non-zero $a \in F$. Define $F^*$
+to be the set of non-zero elements of $F$, and define the map $\phi: F^* \to F^*$
+by $\phi(x) = ax$.
+
+\hfill\break
+Suppose that for $x, y \in F$, $\phi(x) = \phi(y)$. Then
+
+\begin{equation*}
+    ax = ay \iff ax - ay = 0 \iff a(x - y) = 0
+\end{equation*}
+
+As $F$ is an integral domain, it has no zero-divisors. Therefore the above
+implies that either $a = 0$ or $x - y = 0$. As $a$ is non-zero by choice,
+it must hold that $x = y$. Therefore $\phi$ is injective. Further, as $F$
+is finite, $\phi$ must be surjective. Therefore, as $1 \in F^*$, there
+exists $x \in F^*$ so that $\phi(x) = ax = 1$. Hence, every non-zero element
+of $F$ has multiplicative inverse, and $F$ is a field.
 
 \section*{Question 3}
 
