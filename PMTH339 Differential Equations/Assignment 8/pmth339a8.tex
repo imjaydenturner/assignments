@@ -1,0 +1,133 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0pt}
+
+\iffalse <Subject> Assignment <Assignment number> \fi
+\title{PMTH339 Assignment 8}
+\iffalse <dd> <Month> <yyyy> \fi
+\date{21 September 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+\begin{align}
+    (1 - x^2)y'' -& xy' + \alpha^2y = 0\nonumber\\
+    y'' -& \frac{x}{1 - x^2}y' + \frac{\alpha^2}{1 - x^2}y = 0 \label{eq:1-1}
+\end{align}
+
+Define $I(x)$ by
+
+\begin{equation} \label{eq:1-2}
+    I(x) = e^{-\int \frac{x}{1 - x^2}}dx = e^{\frac{1}{2}\ln(1 - x^2)} = \sqrt{1 - x^2}
+\end{equation}
+
+Multiply (\ref{eq:1-1}) by (\ref{eq:1-2}) to get
+
+\begin{align}
+    \sqrt{1 - x^2}y'' -& \frac{x}{\sqrt{1 - x^2}}y' + \frac{\alpha^2}{\sqrt{1 - x^2}} = 0\nonumber\\
+    &(-\sqrt{1 - x^2}y')' + \frac{\alpha^2}{\sqrt{1 - x^2}}y = 0 \label{eq:1-3}
+\end{align}
+
+This is in the form $L[y] = \lambda ry$, where $r(x) = \frac{\alpha^2}{\sqrt{1 - x^2}}$.
+The Chebyshev polynomials $T_n$ solve (\ref{eq:1-3}) and satisfy the initial conditions
+
+\begin{align} \label{eq:1-4}
+    a_1T_n(-1) + a_2T_n'(-1) = 0 && b_1T_n(1) + b_2T_n'(1) = 0
+\end{align}
+
+Therefore, the Chebyshev polynomials are eigenfunctions of the system (\ref{eq:1-3}), (\ref{eq:1-4}),
+and by Theorem 9.1, are $r$-orthogonal, where $r(x) = \frac{\alpha^2}{\sqrt{1 - x^2}}$. That is,
+
+\begin{equation*}
+    \int_{-1}^1 (1 - x^2)^{-1/2}T_m(x)T_n(x) dx = 0
+\end{equation*}
+
+for $m \neq n$.
+
+\section*{Question 2}
+
+\begin{align}
+    u'' + \lambda u &= 0 \label{eq:2-1}\\
+    u'(0) = u'(1) &= 0 \label{eq:2-2}
+\end{align}
+
+If $\lambda > 0$, then $u$ is of the form
+
+\begin{equation*}
+    u = A\cos\sqrt{\lambda}x + B\sin\sqrt{\lambda}x
+\end{equation*}
+
+Therefore $u' = -A\sqrt{\lambda}\sin\sqrt{\lambda}x + B\sqrt{\lambda}\cos\sqrt{\lambda}x$.
+The first condition gives $B = 0$. Therefore $u' = -A\sqrt{\lambda}\sin\sqrt{\lambda}x$. The
+second condition requires $-A\sqrt{\lambda}\sin\sqrt{\lambda} = 0$, which only holds for
+$\lambda = n^2\pi^2$, where $n$ is an integer.
+
+\hfill\break
+If $\lambda = 0$, then $u = A$. For $\lambda < 0$, $u$ is of the form
+
+\begin{equation*}
+    u = Ae^{\sqrt{-\lambda}x} + Be^{-\sqrt{-\lambda}x}
+\end{equation*}
+
+Taking the first derivative and applying the first condition, we get $A = B$.
+Making this substitution and applying the second condition, we get that
+
+\begin{equation*}
+    0 = \sqrt{-\lambda}A(e^{\sqrt{-\lambda}} - e^{-\sqrt{\lambda}})
+\end{equation*}
+
+Which only has solution when $\lambda = 0$, hence there are no solutions for $\lambda < 0$.
+
+\hfill\break
+Therefore, the eigenvalues of the system (\ref{eq:2-1}), (\ref{eq:2-2}) are
+$\lambda_n = n^2\pi^2$ for integer $n \geq 0$, which correspond to eigenfunctions
+$\phi_n = \cos\sqrt{\lambda_n}x$. Note that this includes the case for $\lambda = 0$, which
+corresponds to eigenfunction $\phi_0 = \cos\sqrt{0}x = 1$.
+
+\section*{Question 3}
+
+\section*{Question 4}
+
+\end{document}
