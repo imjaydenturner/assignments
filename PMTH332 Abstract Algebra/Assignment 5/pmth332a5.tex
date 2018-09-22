@@ -190,13 +190,13 @@ for $[(b, a)] \in F$. Also, each element of $F$ has additive inverse
 $[(-\frac{b}{a^2}, \frac{1}{a})]$, where $[(b, a)] + [(-\frac{b}{a^2}, \frac{1}{a})] = [(0, 1)]$.
 Hence $(F, +)$ is an abelian group. Further, given $[(b, a)], [(d, c)], [(f, e)]$ in $F$,
 
-\begin{equation*}
+\begin{align*}
     [(b, a)]\times([(d, c)]\times[(f, e)])
-        = [(b, a)]\times[(df, ce)]
-        = [(bdf, ace)]
-        = [(bd, ac)]\times[(f, e)]
-        = ([(b, a)]\times[(d, c)])\times[(f, e)]
-\end{equation*}
+        &= [(b, a)]\times[(df, ce)]\\
+        &= [(bdf, ace)]\\
+        &= [(bd, ac)]\times[(f, e)]\\
+        &= ([(b, a)]\times[(d, c)])\times[(f, e)]
+\end{align*}
 
 so multiplication is associative. For $(F, +, \times)$ to form a commutative ring, it remains
 to show that the distributive laws hold. Firstly,
@@ -223,7 +223,7 @@ so $(F, +, \times)$ forms a commutative ring. Now, to show that $F$ is a field, 
 to show that $F$ is a commutative division ring. That is, given $[(b, a)] \neq [(0, 1)]$ in $F$,
 there exists a multiplicative inverse for that element. The multiplicative identity is
 $[(1, 1)]$ as $[(b, a)]\times([(1, 1)] = [(b, a)]$. $[(b^{-1}, a^{-1}]$ is the multiplicative
-inverse element. This always exists for non-zero elements of $F$, as $a \neq 0$ ever, and if
+inverse element. This always exists for non-zero elements of $F$, as $a \neq 0$, and if
 $b = 0$ then $(b, a) \sim (0, 1)$, which contradicts $[(b, a)]$ being non-zero. Therefore,
 $F$ is a commutative division ring, and is thus a field.
 
