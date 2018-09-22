@@ -93,13 +93,42 @@ Suppose that for $x, y \in F^*$, $\phi(x) = \phi(y)$. Then
 
 As $F$ is an integral domain, it has no zero-divisors. Therefore the above
 implies that either $a = 0$ or $x - y = 0$. As $a$ is non-zero by choice,
-it must hold that $x = y$. Therefore $\phi$ is injective. Further, as $F$
+it must hold that $x = y$. Therefore $\phi$ is injective. Further, as $F*$
 is finite, $\phi$ must be surjective. Therefore, as $1 \in F^*$, there
 exists $x \in F^*$ so that $\phi(x) = ax = 1$. Hence, every non-zero element
-of $F$ has multiplicative inverse, and $F$ is a field.
+of $F$ has multiplicative inverse, so $F$ is a field.
 
 \section*{Question 3}
 
+Let $R$ be a non-trivial integral domain with 1. The characteristic of $R$
+is the integer $n$ such that $n\mathbb{Z} = \text{ker}\epsilon$, where
+$\epsilon: \mathbb{Z} \to R$ is the unique homomorphism of unital rings, given
+by $\epsilon(n) = n\cdot1_R$.
+
+\hfill\break
+Given that $n\mathbb{Z} = \{x \in \mathbb{Z} | x = nm, m \in \mathbb{Z}\}$ and
+$\ker\epsilon = \{x \in \mathbb{Z} | x\cdot1_R = 0_R\}$, we can deduce that
+if $n$ is the characteristic of $R$, then $nm\cdot1_R = (n\cdot1_R)(m\cdot1_R) = 0_R$
+for all $m \in mathbb{Z}$. $n = 0$ satisfies this, in which case $\mathbb{Z}$ is a
+subring of $R$.
+
+\hfill\break
+Suppose $n \neq 0$ and $n$ is not prime. Then $n = kp$ for some prime $p < n$ and
+natural number $k$. $n$ being the characteristic of $R$, we must have that for
+non-zero $a \in R$, $na\cdot1_R = (k\cdot1_R)(p\cdot1_R)a = 0_R$. As $R$ is an
+integral domain, $R$ has no zero-divisors. Hence it must hold that either $k = 0$
+or $p = 0$. This is a contradiction of the assumption that $n$ is not prime, hence
+$n$ must be so.
+
+\hfill\break
+Therefore, the characteristic of an integral domain with 1 must be either 0 or prime.
+
 \section*{Question 4}
+
+Given an integral domain $D$, consider
+$\widetilde{D} = \{(b, a) | a, b \in D, a \neq 0\}$, and the equivalence
+relation $(b, a) ~ (d, c) \iff bc = ad$. Let $F$ be the set of equivalence
+classes of this equivalence relation.
+
 
 \end{document}
