@@ -92,6 +92,28 @@ $T_n'(x) = nU_{n - 1}(x)$. Finally, they hold the following values at $x = -1, 1
     T_n(-1) = (-1)^n && U_n(-1) = (n + 1)(-1)^n && T_n(1) = 1 && U_n(1) = n + 1
 \end{align}
 
+From this, we can see that the Chebyshev polynomials $T_n$ satisfy (\ref{eq:1-4}) and the
+following boundary conditions
+
+\begin{align} \label{eq:1-6}
+    T_n(-1) - \frac{1}{n^2}T_n'(-1) = 0 && T_n(1) + \frac{1}{n^2}T_n'(1) = 0
+\end{align}
+
+Therefore, the Chebyshev polynomials $T_n$ are eigenfunctions of the linear operator
+$L[y] = (-py')'$ corresponding to eigenvalues $\lambda_n = \alpha \in mathbb{Z}^+$.
+
+\hfill\break
+Let $n$ and $m$ be distinct non-negative integers. Then, as $T_n$ and $T_m$
+are eigenfunctions corresponding to distinct eigenvalues, Theorem 9.1 implies
+that they are $r$-orthogonal for any function $r$. That is, the inner product
+$\langle rT_n, T_m \rangle = 0$. In particular, if $r(x) = \frac{1}{\sqrt{1 - x^2}}$
+we get that
+
+\begin{equation*}
+    \langle rT_n, T_m \rangle = \int_{-1}^{1}(1 - x^2)^{-1}T_n(x)T_m(x) dx = 0
+\end{equation*}
+
+as required.
 
 \section*{Question 2}
 
