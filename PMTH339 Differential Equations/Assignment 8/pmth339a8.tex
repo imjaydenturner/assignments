@@ -100,11 +100,11 @@ following boundary conditions
 \end{align}
 
 Therefore, the Chebyshev polynomials $T_n$ are eigenfunctions of the linear operator
-$L[y] = (-py')'$ corresponding to eigenvalues $\lambda_n = \alpha \in mathbb{Z}^+$.
+$L[y] = (-py')'$ corresponding to non-negative integer $n$ eigenvalues.
 
 \hfill\break
 Let $n$ and $m$ be distinct non-negative integers. Then, as $T_n$ and $T_m$
-are eigenfunctions corresponding to distinct eigenvalues, Theorem 9.1 implies
+are eigenfunctions corresponding to distinct eigenvalues, Theorem 19.1 implies
 that they are $r$-orthogonal for any function $r$. That is, the inner product
 $\langle rT_n, T_m \rangle = 0$. In particular, if $r(x) = \frac{1}{\sqrt{1 - x^2}}$
 we get that
@@ -117,7 +117,50 @@ as required.
 
 \section*{Question 2}
 
+\begin{align} 
+    u'' + \lambda u &= 0 \label{eq:2-1a}\\
+    u'(0) = u'(1) &= 0 \label{eq:2-1b}
+\end{align}
+
+ If $\lambda < 0$, then (\ref{eq:2-1a}) has solution
+ $u(x) = Ae^{\sqrt{-\lambda}x} + Be^{-\sqrt{-\lambda}x}$ for some constants
+ $A$ and $B$. The boundary conditions (\ref{eq:2-1b}) dictate that
+
+ \begin{align*}
+    u'(0) = 0 \implies& A - B = 0 \implies A = B\\
+    u'(1) = 0 \implies& e^{\sqrt{-\lambda}} - e^{-\sqrt{-\lambda}} = 0
+ \end{align*}
+
+ This only holds for $\lambda = 0$, so there are no solutions for negative $\lambda$.
+ If $\lambda = 0$, then (\ref{eq:2-1a}) has solution $u(x) = Ax + B$. Using the boundary
+ conditions, we get that $A = B = 0$. Therefore the trivial solution $u(x) = 0$ corresponds
+ to eigenvalue $\lambda = 0$.
+
+ \hfill \break
+ If $\lambda > 0$, then (\ref{eq:2-1a}) has solution
+ $u(x) = A\sin\sqrt\lambda x + B\cos\sqrt\lambda x$ for some constants $A$ and $B$.
+ The boundary conditions (\ref{eq:2-1b}) give
+
+ \begin{align*}
+    u'(0) = 0 \implies& A\sqrt\lambda\cos 0 - B\sqrt\lambda\sin 0 = A\sqrt\lambda = 0
+        \implies A = 0\\
+    u'(1) = 0 \implies & -B\sqrt\lambda\sin\sqrt\lambda = 0 \implies
+        \sqrt\lambda = n\pi,\: n \in \mathbb{Z}
+ \end{align*}
+
+ Therefore the system (\ref{eq:2-1a}), (\ref{eq:2-1b}) has positive eigenvalues
+ $\lambda_n = n^2\pi^2$ for positive integer $n$. The corresponding eigenfunctions are
+ $\phi_n(x) = \sin n\pi x$. Note that if we set $\lambda_0 = 0$, then $phi_0(x) = \sin 0 = 0$
+ is consistent with the conclusion for $\lambda = 0$.
+
 \section*{Question 3}
+
+\begin{align}
+    u'' + ku &= F(x) \label{eq:3-1a}\\
+    u'(0) = u'(1) &= 0 \label{eq:3-1b}
+\end{align}
+
+
 
 \section*{Question 4}
 
