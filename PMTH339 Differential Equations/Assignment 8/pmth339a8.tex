@@ -2,6 +2,7 @@
 
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{bm}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{hhline}
@@ -122,36 +123,48 @@ as required.
     u'(0) = u'(1) &= 0 \label{eq:2-1b}
 \end{align}
 
- If $\lambda < 0$, then (\ref{eq:2-1a}) has solution
- $u(x) = Ae^{\sqrt{-\lambda}x} + Be^{-\sqrt{-\lambda}x}$ for some constants
- $A$ and $B$. The boundary conditions (\ref{eq:2-1b}) dictate that
+We consider three cases for $\lambda$.
 
- \begin{align*}
-    u'(0) = 0 \implies& A - B = 0 \implies A = B\\
-    u'(1) = 0 \implies& e^{\sqrt{-\lambda}} - e^{-\sqrt{-\lambda}} = 0
- \end{align*}
+\hfill\break
+\underline{$\bm{\lambda > 0}$:}
 
- This only holds for $\lambda = 0$, so there are no solutions for negative $\lambda$.
- If $\lambda = 0$, then (\ref{eq:2-1a}) has solution $u(x) = Ax + B$. Using the boundary
- conditions, we get that $A = B = 0$. Therefore the trivial solution $u(x) = 0$ corresponds
- to eigenvalue $\lambda = 0$.
+If $\lambda > 0$ then (\ref{eq:2-1a}) has solution
+$u(x) = A\cos\sqrt\lambda x + B\sin\sqrt\lambda x$. The boundary condition
+$u'(0) = 0$ implies that $-B\cos\sqrt\lambda 0 = -B = 0$, so $B$ must be 0.
+The second boundary condition gives $A\sin\sqrt\lambda = 0$. This has a
+non-trivial solution when $\sqrt\lambda = n\pi$, $n \in \mathbb{Z}^+$.
+Therefore the system (\ref{eq:2-1a}), (\ref{eq:2-1b}) has eigenvalues
+$\lambda_n = n^2\pi^2$ with corresponding eigenfunctions
+$\phi_n(x) = \cos n\pi x$.
 
- \hfill \break
- If $\lambda > 0$, then (\ref{eq:2-1a}) has solution
- $u(x) = A\sin\sqrt\lambda x + B\cos\sqrt\lambda x$ for some constants $A$ and $B$.
- The boundary conditions (\ref{eq:2-1b}) give
+\hfill\break
+\underline{$\bm{\lambda = 0}$:}
 
- \begin{align*}
-    u'(0) = 0 \implies& A\sqrt\lambda\cos 0 - B\sqrt\lambda\sin 0 = A\sqrt\lambda = 0
-        \implies A = 0\\
-    u'(1) = 0 \implies & -B\sqrt\lambda\sin\sqrt\lambda = 0 \implies
-        \sqrt\lambda = n\pi,\: n \in \mathbb{Z}
- \end{align*}
+If $\lambda = 0$ then $(\ref{eq:2-1a})$ has solution
+$u(x) = Ax + B$. The first boundary condition requires $A = 0$,
+and $u(x) = B$ satisfies the second. Therefore the system has an eigenvalue
+$\lambda_0 = 0$ with corresponding eigenfunction $\phi_0(x) = 1$.
 
- Therefore the system (\ref{eq:2-1a}), (\ref{eq:2-1b}) has positive eigenvalues
- $\lambda_n = n^2\pi^2$ for positive integer $n$. The corresponding eigenfunctions are
- $\phi_n(x) = \sin n\pi x$. Note that if we set $\lambda_0 = 0$, then $phi_0(x) = \sin 0 = 0$
- is consistent with the conclusion for $\lambda = 0$.
+\hfill\break
+\underline{$\bm{\lambda < 0}$:}
+
+If $\lambda < 0$, then the differential equation has solution
+$u(x) = Ae^{\sqrt{-\lambda} x} + Be^{-\sqrt{-\lambda} x}$. The first boundary
+condition gives $0 = A\sqrt{-\lambda}e^0 - B\sqrt{-\lambda}e^0$ which holds as
+long as $A = B$. The second condition, gives
+$0 = A\sqrt{\lambda}(e^{\sqrt{-\lambda}} - e^{-\sqrt{-\lambda}})$. However,
+this is only true for $\lambda = 0$, and so the system has no negative
+eigenvalues.
+
+\hfill \break
+Therefore, (\ref{eq:2-1a}), (\ref{eq:2-1b}) has eigenvalues and eigenfunctions
+given by
+
+\begin{equation*}
+    \lambda_n = n^2\pi^2,\; \phi_n(x) = \cos n\pi x
+\end{equation*}
+
+for non-negative integer $n$.
 
 \section*{Question 3}
 
@@ -160,7 +173,34 @@ as required.
     u'(0) = u'(1) &= 0 \label{eq:3-1b}
 \end{align}
 
+Two solutions to the homogenous differential equation are
+$u_1(x) = \cos\sqrt k x$ and $u_2(x) = \sin\sqrt k x$, which have Wronskian
+$W = \sqrt k$. The general solution of (\ref{eq:3-1a}) is therefore
 
+\begin{align}
+    u(x) &= \sin\sqrt k x \int_0^x \frac{\cos\sqrt k t}{\sqrt k} F(t) dt
+        -\cos\sqrt k x \int_0^x \frac{\sin\sqrt k t}{\sqrt k} F(t)dt
+        + A\cos\sqrt k x + B\sin\sqrt k x \nonumber\\
+    &= \frac{1}{\sqrt k}\int_0^x F(t)(\sin\sqrt k x\cos\sqrt k t
+        - \cos\sqrt k x \sin\sqrt k t) dt + A\cos\sqrt k x
+        + B\sin\sqrt k x \nonumber\\
+    &= \frac{1}{\sqrt{k}} \int_0^x \sin(\sqrt k(x - t))F(t) dt
+        + A\cos\sqrt k x + B\sin\sqrt k x \label{eq:3-2}
+\end{align}
+
+Taking the first derivative, we get
+
+\begin{equation} \label{eq:3-3}
+    u'(x) = \frac{1}{\sqrt k}\int_0^x F(t)\cos(\sqrt k(x - t)) dt
+        - A\sqrt k\sin\sqrt k x + B\sqrt k\cos\sqrt k x
+\end{equation}
+
+The first boundary requires $B = 0$. To satisfy the second boundary
+condition, we need to choose $A$ so that
+
+\begin{equation} \label{eq:3-4}
+    \int_0^1 F(t)\cos(\sqrt k(x - t)) dt -kA\sin\sqrt k = 0
+\end{equation}
 
 \section*{Question 4}
 
