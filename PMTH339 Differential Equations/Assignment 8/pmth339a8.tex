@@ -191,7 +191,7 @@ $W = \sqrt k$. The general solution of (\ref{eq:3-1a}) is therefore
 Taking the first derivative, we get
 
 \begin{equation} \label{eq:3-3}
-    u'(x) = \frac{1}{\sqrt k}\int_0^x F(t)\cos(\sqrt k(x - t)) dt
+    u'(x) = \int_0^x F(t)\cos(\sqrt k(x - t)) dt
         - A\sqrt k\sin\sqrt k x + B\sqrt k\cos\sqrt k x
 \end{equation}
 
@@ -199,9 +199,57 @@ The first boundary requires $B = 0$. To satisfy the second boundary
 condition, we need to choose $A$ so that
 
 \begin{equation} \label{eq:3-4}
-    \int_0^1 F(t)\cos(\sqrt k(x - t)) dt -kA\sin\sqrt k = 0
+    \int_0^1 F(t)\cos(\sqrt k(1 - t)) dt -\sqrt k A\sin\sqrt k = 0
 \end{equation}
 
-\section*{Question 4}
+By Theorem 19.2, if $k$ is not an eigenvalue of the homogeneous
+(\ref{eq:2-1a}), (\ref{eq:2-1b}), then (\ref{eq:3-1a}), (\ref{eq:3-1b})
+has a unique solution. If $k$ is an eigenvalue, then (\ref{eq:3-4})
+only holds if
 
+\begin{equation} \label{eq:3-5}
+    \int_0^1 F(t)\cos(n\pi(1 - t)) dt = 0
+\end{equation}
+
+in which case there are infinitely many solutions of the form
+$y(x) + k\phi_n(x)$, where $y(x)$ is a particular solution and
+$\phi_n(x)$ is the eigenfunction corresponding to eigenvalue
+$k_n = n^2\pi^2$.
+
+\hfill \break
+Consider the case $F(x) = x$. If $k$ is not an eigenvalue then we
+require $A$ so that (\ref{eq:3-4}) holds. Evaluating the integral,
+
+\begin{align*}
+    \int_0^1 t\cos(\sqrt k(1 - t))dt &=
+        \frac{t\sin(\sqrt k(1 - t))}{\sqrt k}\bigg\vert_0^1
+        - \frac{1}{\sqrt k}\int_0^1 \sin(\sqrt k(1 - t)) dt\\
+    &= \frac{\cos(\sqrt k(1 - t))}{k}\bigg\vert_0^1\\
+    &= \frac{1 - \cos\sqrt k}{k}
+\end{align*}
+
+Combining this with (\ref{eq:3-4}), we can find $A$ as
+
+\begin{align*}
+    \frac{1 - \cos\sqrt k}{k} &= \sqrt k A\sin\sqrt k\\
+    \implies A &= \frac{(1 - \cos\sqrt k)\csc\sqrt k}{k\sqrt k}
+\end{align*}
+
+Therefore, if $k$ is not an eigenvalue, the unique solution is
+
+\begin{align*}
+    u(x) &= \frac{1}{\sqrt k}\int_0^x t\sin(\sqrt k(x - t)) dt
+        + \cos\sqrt k x \frac{(1 - \cos\sqrt k)\csc\sqrt k}{k\sqrt k}\\
+    &= -\frac{t\cos\sqrt k(x - t)}{k}\bigg\vert_0^x
+        + \cos\sqrt k x \frac{(1 - \cos\sqrt k)\csc\sqrt k}{k \sqrt k}\\
+    &= -\frac{x}{k} + \cos\sqrt k x \frac{(1 - \cos\sqrt k)\csc\sqrt k}{k \sqrt k}
+\end{align*}
+
+If $k = k_n$ is an eigenvalue, then the infinite solutions are
+
+\begin{equation*}
+    u_n(x) = x + A\cos n\pi x
+\end{equation*}
+
+where $A$ is an arbitrary constant.
 \end{document}
