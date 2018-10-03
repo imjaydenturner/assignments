@@ -1,0 +1,131 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=25mm,
+    top=25mm
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=mystyle}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\setlength{\parindent}{0pt}
+
+\iffalse <Subject> Assignment <Assignment number> \fi
+\title{PMTH332 Assignment 6}
+\iffalse <dd> <Month> <yyyy> \fi
+\date{5 October 2018}
+\author{Jayden Turner (SN 220188234)}
+
+\begin{document}
+\maketitle
+\pagenumbering{arabic}
+
+\section*{Question 1}
+
+\hfill \break
+Take $n \in \mathbb{Z}$. If $3 \mid n$, then $n^{33} \equiv n\mod3
+\implies 3 | n^{33} - n$. If $3 \nmid n$, then
+
+\begin{align}
+    n^{33} - n = n(n^{32} - 1) = n((n^2)^{16} - n)
+        = n((n^{\phi(3)})^{16} - n) &\equiv n(1 - 1)\mod3 \label{eq:1-1}\\
+    &\equiv 0\mod3\nonumber
+\end{align}
+
+where $\phi(n)$ is the Euler phi function, and (\ref{eq:1-1}) holds
+by Euler's theorem. Thus $3 | n^{33} - n$ for all integer $n$.
+Similiarly, if $5 \mid n$, then $n^{33} \equiv n\mod5 \implies 5 | n^{33} - n$.
+Otherwise,
+
+\begin{align}
+    n^{33} - n = n(n^{32} - 1) = n((n^4)^8 - 1)
+        = n((n^{\phi(n)})^8 - 1) &\equiv n(1 - 1)\mod5 \label{eq:1-2}\\
+    &\equiv 0\mod5\nonumber
+\end{align}
+
+where (\ref{eq:1-2}) holds by Euler's theorem, and hence $5 | n^{33} - n$ for
+all integer $n$. Therefore, as both 3 and 5 divide $n^{33} - n$, and $\gcd(3, 5) = 1$,
+it must hold that $3\cdot5 = 15 | n^{33} - n$ as required.
+
+\section*{Question 2}
+
+Given a field $F$, the ring of polynomials over $F$, $F[x]$ is an integral
+domain. define $d: F[x] \to \mathbb{N}$ as
+
+\begin{equation}
+    d(\alpha) := \begin{cases}
+        0, & \alpha = 0\\
+        2^{\text{deg}(\alpha)}, & \alpha \neq 0
+    \end{cases}
+\end{equation}
+
+By definition, $d(\alpha) = 0$ if and only if $\alpha = 0$. Further,
+$d(1) = 2^0 = 1$, and as $\text{deg}(\alpha) \geq 0$,
+$d(\alpha\beta) = 2^{\text{deg}(\alpha)}2^{\text{deg}(\beta)}
+    \geq 2^{\text{deg}(\alpha)} = d(\alpha)$, given $\beta \neq 0$. Thus
+$d$ satisfies the first two axioms of a Euclidean function. To see that it
+satisfies the third, take $\alpha, \beta \in F[x]$ such that
+$n = \text{deg}(\alpha) \geq \text{deg}(\beta) = m$. Then define $q, r \in F[x]$ as
+
+\begin{equation*}
+    q := \frac{a_n}{b_m}x^{n - m}
+\end{equation*}
+
+and
+
+\begin{equation*}
+    r := \alpha - q\beta
+\end{equation*}
+
+Clearly $\alpha = q\beta + r$. Expanding $r$ we see that
+
+\begin{align*}
+    r &= a_nx^n + a_{n - 1}x^{n - 1} + ... + a_0 - \frac{a_n}{b_m}b_mx^{n}
+        - ... - \frac{a_n}{b_m}b_0x^{n - m}\\
+    &= \left(a_{n - 1} - \frac{a_n}{b_m}b_{m - 1}\right)x^{n - 1} + ...
+        + \left(a_{n - m} - \frac{a_n}{b_m}b_0\right)x^{n - m} + ...
+\end{align*}
+
+which shows that $\text{deg}(r) \leq n - 1 < \text{deg}(\beta)$, and hence
+$d$ is a Euclidean function. Thus $F[x]$ is a Euclidean domain, which is
+a principal ideal domain, by Theorem 17.3. Therefore, given any ideal $I$
+in $F[x]$, $I = (\alpha)$ for some $\alpha in F[x]$. If $I$ is a prime
+ideal, then $\alpha$ is prime in $F[x]$. But by Theorem 17.14, if $\alpha$
+is prime, then $(\alpha) = I$ is maximal. Therefore, all proper prime ideals
+of $F[x]$ are maximal.
+
+\section*{Question 3}
+\section*{Question 4}
+\section*{Question 5}
+
+\end{document}
