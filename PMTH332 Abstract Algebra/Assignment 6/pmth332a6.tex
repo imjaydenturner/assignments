@@ -36,9 +36,9 @@
     tabsize=4
 }
 \lstset{style=mystyle}
-
-\newcommand\tab[1][1cm]{\hspace*{#1}}
 \setlength{\parindent}{0pt}
+
+\newcommand\cart[2]{{#1}\times{#2}}
 
 \iffalse <Subject> Assignment <Assignment number> \fi
 \title{PMTH332 Assignment 6}
@@ -52,50 +52,62 @@
 
 \section*{Question 1}
 
-\hfill \break
-Take $n \in \mathbb{Z}$. If $3 \mid n$, then $n^{33} \equiv n\mod3
-\implies 3 | n^{33} - n$. If $3 \nmid n$, then
+If $\phi$ is the Euler phi function, then we have $\phi(3) = 2$ and
+$\phi(5) = 4$. This, combined with Euler's theorem gives
 
 \begin{align}
-    n^{33} - n = n(n^{32} - 1) = n((n^2)^{16} - n)
-        = n((n^{\phi(3)})^{16} - n) &\equiv n(1 - 1)\mod3 \label{eq:1-1}\\
-    &\equiv 0\mod3\nonumber
+    a^2 &\equiv 1\mod3 \label{eq:1-1}\\
+    b^4 &\equiv 1\mod5 \label{eq:1-2}
 \end{align}
 
-where $\phi(n)$ is the Euler phi function, and (\ref{eq:1-1}) holds
-by Euler's theorem. Thus $3 | n^{33} - n$ for all integer $n$.
-Similiarly, if $5 \mid n$, then $n^{33} \equiv n\mod5 \implies 5 | n^{33} - n$.
+where $a$ and $b$ are integers coprime to 3 and 5 respectively.
+
+\hfill \break
+Take $n \in \mathbb{Z}$. If $3 \mid n$, then
+$n^{33} \equiv n\mod3 \implies n^{33} - n \equiv 0\mod3$. Otherwise,
+
+\begin{align*}
+    n^{33} - n = n(n^{32} - 1) &= n((n^2)^{16} - 1)\\
+    (\ref{eq:1-1}) \implies &\equiv n(1 - 1)\mod3\\
+    &\equiv 0 \mod 3
+\end{align*}
+
+That is, for all $n \in \mathbb{Z}$, $3 | n^{33} - n$. Likewise, if
+$5 | n$, then $n^{33} \equiv n\mod5 \implies n^{33} - n \equiv 0\mod5$.
 Otherwise,
 
-\begin{align}
-    n^{33} - n = n(n^{32} - 1) = n((n^4)^8 - 1)
-        = n((n^{\phi(n)})^8 - 1) &\equiv n(1 - 1)\mod5 \label{eq:1-2}\\
-    &\equiv 0\mod5\nonumber
-\end{align}
+\begin{align*}
+    n^{33} - n = n(n^{32} - 1) &= n((n^4)^8 - 1)\\
+    (\ref{eq:1-2}) \implies &\equiv n(1 - 1)\mod5\\
+    &\equiv 0 \mod 5
+\end{align*}
 
-where (\ref{eq:1-2}) holds by Euler's theorem, and hence $5 | n^{33} - n$ for
-all integer $n$. Therefore, as both 3 and 5 divide $n^{33} - n$, and $\gcd(3, 5) = 1$,
-it must hold that $3\cdot5 = 15 | n^{33} - n$ as required.
+That is, $5 | n^{33} - n$ for all $n \in \mathbb{Z}$. Therefore, as both
+3 and 5 divide $n^{33} - n$, and $\gcd(3, 5) = 1$, it must hold that
+$3\cdot5 = 15 | n^{33} - n$.
 
 \section*{Question 2}
 
-Given a field $F$, the ring of polynomials over $F$, $F[x]$ is an integral
-domain. define $d: F[x] \to \mathbb{N}$ as
+Let $F$ be a field. Then $F[x]$ is an integral domain permitting Euclidean
+function $d: F[x] \to \mathbb{N}$, where
 
-\begin{equation}
-    d(\alpha) := \begin{cases}
+\begin{align*}
+    d := \begin{cases}
         0, & \alpha = 0\\
-        2^{\text{deg}(\alpha)}, & \alpha \neq 0
+        2^{\deg{\alpha}}, & \alpha \neq 0
     \end{cases}
-\end{equation}
+\end{align*}
 
-By definition, $d(\alpha) = 0$ if and only if $\alpha = 0$. Further,
-$d(1) = 2^0 = 1$, and as $\text{deg}(\alpha) \geq 0$,
-$d(\alpha\beta) = 2^{\text{deg}(\alpha)}2^{\text{deg}(\beta)}
-    \geq 2^{\text{deg}(\alpha)} = d(\alpha)$, given $\beta \neq 0$. Thus
-$d$ satisfies the first two axioms of a Euclidean function. To see that it
-satisfies the third, take $\alpha, \beta \in F[x]$ such that
-$n = \text{deg}(\alpha) \geq \text{deg}(\beta) = m$. Then define $q, r \in F[x]$ as
+To see that this is a Euclidean function, we verify that $d$ satisfies
+the three required axioms. Observe that E1 holds by definition, and that
+$d(1) = 2^{\deg 1} = 2^0 = 1$. Further, if $\alpha, \beta \in F[x]$ and
+$\beta \neq 0$, then
+$d(\alpha\beta) = 2^{\deg(\alpha\beta)}
+    = 2^{\deg\alpha}2^{\deg\beta}
+    \geq 2^{deg\alpha} = d(\alpha)$
+so E2 also holds. Finally, given arbitrary $\alpha, \beta in F[x]$ with
+expansions $\alpha = \sum_{i = 0}^n a_ix^i$, $\beta = \sum_{j = 0}^m b_jx^j$,
+where $n \geq m$, it is possible to define
 
 \begin{equation*}
     q := \frac{a_n}{b_m}x^{n - m}
@@ -103,29 +115,139 @@ $n = \text{deg}(\alpha) \geq \text{deg}(\beta) = m$. Then define $q, r \in F[x]$
 
 and
 
-\begin{equation*}
+\begin{equation} \label{eq:2-1}
     r := \alpha - q\beta
-\end{equation*}
+\end{equation}
 
-Clearly $\alpha = q\beta + r$. Expanding $r$ we see that
+such that $\alpha = q\beta + r$. Expanding (\ref{eq:2-1}), we get
 
 \begin{align*}
-    r &= a_nx^n + a_{n - 1}x^{n - 1} + ... + a_0 - \frac{a_n}{b_m}b_mx^{n}
-        - ... - \frac{a_n}{b_m}b_0x^{n - m}\\
-    &= \left(a_{n - 1} - \frac{a_n}{b_m}b_{m - 1}\right)x^{n - 1} + ...
-        + \left(a_{n - m} - \frac{a_n}{b_m}b_0\right)x^{n - m} + ...
+    \alpha - q\beta &= \sum_{i = 0}^n a_ix^i - \frac{a_n}{b_m}x^{n - m}\sum_{i = 0}^m b_ix^i\\
+    &= a_nx^n + \sum_{i = 0}^{n - 1}a_ix^i - a_nx^{n} - \sum_{i = n - m}^{n - 1}
+        \frac{a_n}{b_m}b_{i - n + m}x^i\\
+    &= \sum_{i = 0}^{n - 1}c_ix^i
 \end{align*}
 
-which shows that $\text{deg}(r) \leq n - 1 < \text{deg}(\beta)$, and hence
-$d$ is a Euclidean function. Thus $F[x]$ is a Euclidean domain, which is
-a principal ideal domain, by Theorem 17.3. Therefore, given any ideal $I$
-in $F[x]$, $I = (\alpha)$ for some $\alpha in F[x]$. If $I$ is a prime
-ideal, then $\alpha$ is prime in $F[x]$. But by Theorem 17.14, if $\alpha$
-is prime, then $(\alpha) = I$ is maximal. Therefore, all proper prime ideals
-of $F[x]$ are maximal.
+with
+
+\begin{equation*}
+    c_i := \begin{cases}
+        a_i, & 0 \leq i \leq n - m - 1\\
+        \frac{a_n}{b_m}b_i, & n - m \leq i \leq n - 1
+    \end{cases}
+\end{equation*}
+
+Hence it is always possible to find $q, r$ such that $\alpha = q\beta + r$ with
+$d(r) < d(\beta)$, and axiom E3 is satisfied. $d$ is therefore a Euclidean function on
+integral domain $F[x]$, making $F[x]$ a Euclidean domain, and hence a principal
+ideal domain, by Theorem 17.3.
+
+\hfill\break
+Take arbitrary prime ideal $P$ of $F[x]$. As $F[x]$ is a pid, $P = (\alpha)$ for some
+$\alpha \in F[x]$, making $\alpha$ prime in $F[x]$ by definition. By
+Theorem 17.14, $(\alpha) = P$ must be maximal. Hence every prime ideal of $F[x]$,
+for field $F$, is maximal, as required.
 
 \section*{Question 3}
+
+As shown in Question 2, if $F$ is a field then $F[x]$ is a principal ideal domain.
+Therefore, as $\gcd(f(x), g(x)) = 1$, there exist $u(x), v(x) \in F[x]$ satisfying
+
+\begin{equation} \label{eq:3-1}
+    1 = u(x)f(x) + v(x)g(x)
+\end{equation}
+
+Given that $f(x)\mid h(x)$ and $g(x)\mid h(x)$, we have
+
+\begin{align}
+    h(x) &= s(x)f(x) \label{eq:3-2}\\
+    h(x) &= t(x)g(x) \label{eq:3-3}
+\end{align}
+
+for some $s(x), t(x) \in F[x]$. Multiply (\ref{eq:3-1}) by $h(x)$ to get
+
+\begin{equation}
+    h(x) = u(x)h(x)f(x) + v(x)h(x)g(x) \label{eq:3-4}
+\end{equation}
+
+Expanding $h(x)$ in the left summand with (\ref{eq:3-3}) and using
+(\ref{eq:3-2}) in the right, we obtain
+
+\begin{align*}
+    h(x) &= u(x)t(x)f(x)g(x) + v(x)s(x)f(x)g(x)\\
+    &= f(x)g(x)(u(x)t(x) + v(x)s(x))
+\end{align*}
+
+and hence $f(x)g(x)\mid h(x)$ as required.
+
 \section*{Question 4}
+
+\textbf{a)} As $\mathbb{Z}$ is principal ideal domain, so is $\mathbb{Z}_{12}$. That is,
+every ideal $I$ is of the form $I = (a)$ for some $a \in \mathbb{Z}_{12}$. By Theorem 16.11,
+every non-zero maximal ideal of a commutative unital ring is prime. Therefore, it is
+possible to find the prime ideals of $\mathbb{Z}_{12}$ by finding the ideals generated
+by each element of $\mathbb{Z}_{12}$ and determining which are maximal. The ideals of
+$\mathbb{Z}_{12}$, excluding $(0)$, are
+
+\begin{align*}
+    (1) &= \mathbb{Z}_{12}\\
+    (2) &= \{0, 2, 4, 6, 8, 10\}\\
+    (3) &= \{0, 3, 6, 9\}\\
+    (4) &= \{0, 4, 8\}\\
+    (5) &= \mathbb{Z}_{12}\\
+    (6) &= \{0, 6\}\\
+    (7) &= \mathbb{Z}_{12}\\
+    (8) &= \{0, 4, 8\}\\
+    (9) &= \{0, 3, 6, 9\}\\
+    (10) &= \{0, 2, 4, 6, 8, 10\}\\
+    (11) &= \mathbb{Z}_{12}
+\end{align*}
+
+As prime ideals are, by definition, proper, we therefore have that the prime
+ideals of $\mathbb{Z}_{12}$ are $(2)$ and $(3)$.
+
+\hfill\break
+\textbf{b)} $I = \cart{\mathbb{Z}}{\{0\}}$ is a prime ideal of $\cart{\mathbb{Z}}{\mathbb{Z}}$.
+To see that it is an ideal, take $(a, 0) \in I$ and $(b, c) \in \cart{\mathbb{Z}}{\mathbb{Z}}$.
+Then $(a, 0)\cdot(b, c) = (ab, 0) \in I$. To see that it is prime, take
+$x = (a, b), y = (c, d) \in \cart{\mathbb{Z}}{\mathbb{Z}}$. If
+$xy = (ac, bd)$ is in $I$, then either $c = 0$ or $d = 0$. Therefore
+$xy \in I$ implies $x \in I$ or $y \in I$, which makes $I$ prime by definition. However,
+$I$ is not maximal as $\cart{\mathbb{Z}}{p\mathbb{Z}}$ is prime for prime integer $p$, and
+$I \subset \cart{\mathbb{Z}}{p\mathbb{Z}}$.
+
 \section*{Question 5}
+
+Evaluating $p(x) = x^3 + 2x + 3$ for each element of $\mathbb{Z}_5$ we get
+
+\begin{align*}
+    p(0) &\equiv 3\\
+    p(1) &= 6 \equiv 1\mod5\\
+    p(2) &= 15 \equiv 0\mod5\\
+    p(3) &= 36 \equiv 1\mod5\\
+    p(4) &= 75 \equiv 0\mod5
+\end{align*}
+
+Hence $p(x)$ has roots in $\mathbb{Z}_5$ at $x = 2, 4$. By the factor theorem,
+
+\begin{equation*}
+    p(x) = (x - 2)(x - 4)\beta \equiv (x + 3)(x + 1)\beta
+\end{equation*}
+
+where $\beta$ is an element of $\mathbb{Z}_5[x]$ of degree 1. Suppose
+$\beta = ax + b$. Then,
+
+\begin{align*}
+    p(x) = x^3 + 2x + 3 &= (ax + b)(x + 3)(x + 1)\\
+    &= (ax + b)(x^2 + 4x + 3)\\
+    &= ax^3 + (4a + b)x^2 + (3a + 4b)x + 3b
+\end{align*}
+
+Equating coefficients, we get $a = 1$ and $4 + b = 0 \implies b \equiv 1\mod5$. Therefore
+$p(x)$ can be decomposed into the product of irreducible polynomials
+
+\begin{equation*}
+    p(x) = (x + 1)^2(x + 3)
+\end{equation*}
 
 \end{document}
